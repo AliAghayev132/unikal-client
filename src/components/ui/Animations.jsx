@@ -46,7 +46,7 @@ export const ContainerAnimation = ({ children, delay = 0 }) => {
 )};
 
 // Grid with staggered children
-export const GridAnimation = ({ children, stagger = 0.15 }) => {
+export const GridAnimation = ({ children, stagger = 0.15 ,className}) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -65,13 +65,14 @@ export const GridAnimation = ({ children, stagger = 0.15 }) => {
         transition: { staggerChildren: stagger },
       },
     }}
+    className={className}
   >
     {children}
   </motion.div>
 )};
 
 // Individual item inside GridAnimation
-export const ItemAnimation = ({ children, delay = 0 }) => {
+export const ItemAnimation = ({ children, delay = 0,className }) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -86,6 +87,7 @@ export const ItemAnimation = ({ children, delay = 0 }) => {
     transition={{ duration: 0.6, delay, ease: [0.25, 1, 0.5, 1] }}
     viewport={{ once: true }}
     style={{ willChange: "opacity, transform" }}
+    className={className}
   >
     {children}
   </motion.div>

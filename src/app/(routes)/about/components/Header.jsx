@@ -3,22 +3,18 @@
 import Button from "@/components/ui/Button";
 import React from "react";
 import { motion } from "framer-motion";
+import { GridAnimation, ItemAnimation, TextAnimation } from "@/components/ui/Animations";
 
 const Header = () => {
   return (
     <section className="w-full h-[70vh] py-10 md:py-14 lg:py-16">
       <div className="wrapper">
         {/* Top content: left title block, right description + CTA */}
-        <motion.h1
-          className="font-bold leading-tight text-xl md:text-2xl lg:text-3xl"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
-          viewport={{ once: true }}
-          style={{ willChange: "opacity, transform" }}
-        >
-          Haqqımızda
-        </motion.h1>
+        <TextAnimation>
+          <h1 className="font-bold leading-tight text-xl md:text-2xl lg:text-3xl">
+            Haqqımızda
+          </h1>
+        </TextAnimation>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start sm:mt-10">
           {/* Right side */}
@@ -30,7 +26,8 @@ const Header = () => {
             viewport={{ once: true }}
             style={{ willChange: "opacity, transform" }}
           >
-            Sağlamlığınız üçün <span className="text-primary">UNİKAL</span> yanaşma!
+            Sağlamlığınız üçün <span className="text-primary">UNİKAL</span>{" "}
+            yanaşma!
           </motion.h2>
 
           <motion.div
@@ -57,41 +54,34 @@ const Header = () => {
         </div>
 
         {/* Stats row */}
-        <motion.div
+        <GridAnimation
           className="mt-12 md:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 1, 0.5, 1] }}
-          viewport={{ once: true }}
-          style={{ willChange: "opacity, transform" }}
+          
         >
           {/* Stat 1 */}
-          <motion.div
+          <ItemAnimation
             className="flex flex-col sm:items-start items-center gap-2 sm:pl-6 sm:border-l-2 border-primary"
-            whileHover={{ y: -5 }}
-            transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+            delay={0}  
           >
             <div className="text-3xl md:text-4xl font-semibold">
               400<span className="text-primary">K+</span>
             </div>
             <div className="text-sm text-neutral-600">Məmnun müştəri</div>
-          </motion.div>
+          </ItemAnimation>
 
-          <motion.div
+          <ItemAnimation 
             className="flex flex-col sm:items-start items-center gap-2 sm:pl-6 sm:border-l-2 border-primary"
-            whileHover={{ y: -5 }}
-            transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+            delay={0.2}  
           >
             <div className="text-3xl md:text-4xl font-semibold">
               150<span className="text-primary">+</span>
             </div>
             <div className="text-sm text-neutral-600">Peşəkar əməkdaş</div>
-          </motion.div>
+          </ItemAnimation>
 
-          <motion.div
+          <ItemAnimation
             className="flex flex-col sm:items-start items-center gap-2 sm:pl-6 sm:border-l-2 border-primary"
-            whileHover={{ y: -5 }}
-            transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+            delay={0.4}        
           >
             <div className="text-3xl md:text-4xl font-semibold">
               120<span className="text-primary">+</span>
@@ -99,8 +89,8 @@ const Header = () => {
             <div className="text-sm text-neutral-600">
               İxtisaslaşmış şöbə və xidmət sahəsi
             </div>
-          </motion.div>
-        </motion.div>
+          </ItemAnimation>
+        </GridAnimation>
       </div>
     </section>
   );

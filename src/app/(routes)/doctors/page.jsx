@@ -1,7 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { TextAnimation } from "@/components/ui/Animations";
+import { ItemAnimation, TextAnimation } from "@/components/ui/Animations";
 import { doctors } from "@/data/doctors";
 import { services } from "@/data/services";
 
@@ -33,9 +33,11 @@ export default function DoctorsPage() {
               Peşəkar <span className="text-primary">həkimlərimiz</span>
             </h1>
           </TextAnimation>
+          <TextAnimation delay={0.2}>
           <p className="text-neutral-600 md:text-lg">
             Xidmətlərə görə və ada görə axtarış edin.
           </p>
+          </TextAnimation>
         </div>
       </section>
 
@@ -76,10 +78,11 @@ export default function DoctorsPage() {
           <p className="text-neutral-600">Heç bir nəticə tapılmadı.</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((doc) => {
+            {filtered.map((doc,index) => {
               const service = services.find((s) => s.slug === doc.serviceSlug);
               return (
-                <article key={doc.id} className="rounded-2xl border border-neutral-200 p-6 shadow-sm">
+                <ItemAnimation key={doc.id} delay={index * 0.1}>
+                <article className="rounded-2xl border border-neutral-200 p-6 shadow-sm">
                   <div className="flex items-center gap-4">
                     <div className="relative h-16 w-16 rounded-xl overflow-hidden">
                       <Image src={doc.image} alt={doc.name} fill className="object-cover" />
@@ -93,6 +96,7 @@ export default function DoctorsPage() {
                     </div>
                   </div>
                 </article>
+                </ItemAnimation>
               );
             })}
           </div>

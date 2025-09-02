@@ -99,13 +99,13 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3">
               {[
-                { name: "Haqqımızda", href: "/about" },
+                { name: "Haqqımızda", href: "/about",id:1 },
                 // { name: "Şöbələr", href: "/services" },
-                { name: "Həkimlərimiz", href: "/doctors" },
-                { name: "Vakansiyalar", href: "/vacancies" }
-              ].map((link, index) => (
+                { name: "Həkimlərimiz", href: "/doctors",id:2 },
+                { name: "Vakansiyalar", href: "/vacancies",id:3 }
+              ].map((link) => (
                 <motion.li 
-                  key={index}
+                  key={link.id}
                   whileHover={{ x: 5 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
@@ -124,14 +124,14 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3">
               {[
-                { name: "Xidmətlər", href: "/services" },
+                { name: "Xidmətlər", href: "/services",id:1 },
 
-                { name: "Xəbərlər", href: "/blogs" },
+                { name: "Xəbərlər", href: "/blogs",id:2 },
                 // { name: "Tez-tez verilən suallar", href: "/faq" },
-                { name: "Qəbula Yazıl", href: "/contact" }
-              ].map((link, index) => (
+                { name: "Qəbula Yazıl", href: "/contact",id:3 }
+              ].map((link) => (
                 <motion.li 
-                  key={index}
+                  key={link.id}
                   whileHover={{ x: 5 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
