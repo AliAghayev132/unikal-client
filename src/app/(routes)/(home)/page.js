@@ -7,7 +7,7 @@ import FAQ from "./components/FAQ";
 import Blogs from "./components/Blogs";
 
 export const metadata = {
-  title: "Ana Səhifə",
+  title: "Unikal Klinika",
   description: "Ana Səhifə",
   keywords: ["Ana Səhifə"]
 };
