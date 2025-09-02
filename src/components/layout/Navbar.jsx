@@ -13,9 +13,9 @@ const Navbar = () => {
   const navLinks = [
     { href: "/", label: "Ana Səhifə" },
     { href: "/about", label: "Haqqımızda" },
-    { href: "/contact", label: "Əlaqə" },
-    { href: "/blogs", label: "Xəbərlər" },
     { href: "/services", label: "Xidmətlər" },
+    { href: "/blogs", label: "Xəbərlər" },
+    { href: "/contact", label: "Əlaqə" },
   ];
 
   return (
@@ -23,7 +23,11 @@ const Navbar = () => {
       <div className="flex w-full items-center justify-between">
         {/* Left: Logo */}
         <div className="flex items-center gap-10">
-          <Image src={logo} alt="Logo" width={140} height={140} />
+          <Link href="/">
+          <div className="sm:w-[140px] w-[110px]">
+            <Image priority src={logo} alt="Logo" width={140} height={140} />
+          </div>
+          </Link>
           {/* Desktop Links */}
           <div className="hidden md:flex gap-10 ml-7">
             {navLinks.map((link) => (
@@ -41,7 +45,7 @@ const Navbar = () => {
         {/* Right: Call + Button (Desktop) */}
         <div className="hidden md:flex items-center gap-5">
           <div className="flex items-center">
-            <Image src={phone} alt="Phone" width={40} height={40} />
+            <Image priority src={phone} alt="Phone" width={40} height={40} />
             <h2 className="text-2xl font-semibold text-gray-800">*5005</h2>
           </div>
           <Button text="Qəbula Yazılın" variant="default" isLink href="/contact" />
@@ -49,7 +53,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-gray-800"
+          className="md:hidden text-gray-800 mr-3"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -64,7 +68,9 @@ const Navbar = () => {
       >
         {/* Header of mobile menu */}
         <div className="flex items-center justify-between px-6 py-6">
-          <Image src={logo} alt="Logo" width={120} height={120} />
+          <Link href="/" className="sm:w-[140px] w-[110px]">
+            <Image priority src={logo} alt="Logo" width={"auto"} height={"auto"} />
+          </Link>
           <button onClick={() => setIsOpen(false)}>
             <X size={28} className="text-gray-800" />
           </button>
@@ -87,7 +93,7 @@ const Navbar = () => {
         {/* Bottom Call + Button */}
         <div className="mt-auto flex flex-col gap-4 px-8 py-6">
           <div className="flex items-center justify-center">
-            <Image src={phone} alt="Phone" width={40} height={40} />
+            <Image priority src={phone} alt="Phone" width={40} height={40} />
             <h2 className="text-xl font-semibold text-gray-800">*5005</h2>
           </div>
           <Button text="Qəbula Yazılın" isLink href="/contact" variant="default" />

@@ -15,30 +15,40 @@ const doctors = [
   { id: 6, name: "Dr. Jennifer Lee", role: "Psixiatr" },
 ];
 
+// Parent container animasiya
 const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.08 },
+    transition: { staggerChildren: 0.1, ease: "easeOut" },
   },
 };
 
+// Uşaq elementlərin animasiyası
 const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.25, 1, 0.5, 1] } },
 };
 
 const Doctors = () => {
   return (
     <section className="wrapper mx-auto py-12 md:py-16">
-      <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
+      {/* Başlıq */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1]}}
+        viewport={{ once: true }}
+        className="text-center max-w-2xl mx-auto mb-10 md:mb-14"
+      >
         <h2 className="text-3xl md:text-4xl font-semibold mb-3">Həkimlərimiz</h2>
         <p className="text-slate-600 text-sm md:text-base">
           Hospitalımızda cərrahi, terapevtik və diaqnostik sahələrdə fəaliyyət göstərən peşəkar
           həkimlərimiz daima yanınızdadır.
         </p>
-      </div>
+      </motion.div>
 
+      {/* Həkim Kartları */}
       <motion.div
         variants={container}
         initial="hidden"
@@ -47,9 +57,19 @@ const Doctors = () => {
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 md:gap-x-8 md:gap-y-16"
       >
         {doctors.map((d) => (
-          <motion.div key={d.id} variants={item} className="flex flex-col items-center">
+          <motion.div
+            key={d.id}
+            variants={item}
+            whileHover={{ y: -6, transition: { duration: 0.3, ease: [0.25, 1, 0.5, 1] } }}
+            className="flex flex-col items-center"
+            style={{willChange: "transform"}}
+          >
             {/* Avatar */}
-            <div className="sm:-mb-4 -mb-3 z-10">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+              className="sm:-mb-4 -mb-3 z-10"
+            >
               <div className="h-36 w-36 md:h-44 md:w-44 overflow-hidden rounded-2xl bg-indigo-50 ring-1 ring-indigo-100 grid place-items-center">
                 <Image
                   src={doctorImg}
@@ -60,10 +80,14 @@ const Doctors = () => {
                   priority={false}
                 />
               </div>
-            </div>
+            </motion.div>
 
-            {/* Card */}
-            <div className="w-full rounded-3xl border border-slate-200/80 bg-white p-6 text-center shadow-sm max-w-sm">
+            {/* Kart */}
+            <motion.div
+              whileHover={{ boxShadow: "0px 10px 25px rgba(0,0,0,0.1)" }}
+              transition={{ duration: 0.3 }}
+              className="w-full rounded-3xl border border-slate-200/80 bg-white p-6 text-center shadow-sm max-w-sm"
+            >
               <h3 className="text-lg font-semibold text-slate-900">{d.name}</h3>
               <p className="text-slate-600 text-sm">{d.role}</p>
               <p className="mt-3 text-slate-600 text-sm leading-relaxed">
@@ -71,6 +95,7 @@ const Doctors = () => {
                 mattis eros.
               </p>
 
+              {/* Sosial Linklər */}
               <div className="mt-4 flex items-center justify-center gap-4 text-slate-700">
                 <a href="#" aria-label="LinkedIn" className="hover:text-slate-900">
                   <Linkedin size={18} />
@@ -85,7 +110,7 @@ const Doctors = () => {
                   <Dribbble size={18} />
                 </a>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         ))}
       </motion.div>

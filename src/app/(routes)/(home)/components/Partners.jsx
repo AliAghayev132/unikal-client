@@ -13,7 +13,7 @@ const Partners = () => {
   ];
 
   return (
-    <section className="py-12 mx-auto max-w-[1600px]">
+    <section className="py-12 mx-auto w-full">
       <h2 className="text-center text-3xl md:text-4xl font-semibold mb-8">
         Etibarlı Partnyorlarımız
       </h2>

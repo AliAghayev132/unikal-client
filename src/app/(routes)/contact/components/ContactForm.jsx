@@ -1,10 +1,12 @@
 'use client'
 import React from 'react'
 import Button from '@/components/ui/Button'
+import { ContainerAnimation } from '@/components/ui/Animations'
 
 const ContactForm = () => {
   return (
     <section className="wrapper -mt-4">
+      <ContainerAnimation>
     <div className="max-w-3xl mx-auto bg-white rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.15)] border border-slate-100 p-5 sm:p-7 md:p-8">
       <form onSubmit={(e)=>e.preventDefault()} className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         {/* Name */}
@@ -38,6 +40,7 @@ const ContactForm = () => {
         </div>
       </form>
     </div>
+    </ContainerAnimation>
   </section>
   )
 }

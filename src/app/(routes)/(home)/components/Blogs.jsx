@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 
 const posts = [
   {
@@ -39,7 +40,14 @@ const Blogs = () => {
     <section className="w-full bg-white py-16 md:py-24">
       <div className="wrapper mx-auto px-4 md:px-6">
         {/* Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+        <motion.div
+          className="text-center max-w-3xl mx-auto mb-10 md:mb-14"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
+          viewport={{ once: true }}
+          style={{ willChange: "opacity, transform" }}
+        >
           <span className="inline-flex items-center rounded-full bg-indigo-50 text-indigo-700 px-3 py-1 text-xs font-medium">
             Bloq
           </span>
@@ -50,21 +58,35 @@ const Blogs = () => {
             Sizin üçün faydalı sağlamlıq məsləhətləri, həkim tövsiyələri və gündəlik
             həyatınızı yaxşılaşdıracaq məlumatlarla dolu yazılarımızı oxuyun.
           </p>
-        </div>
+        </motion.div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {posts.map((post) => (
-            <article
+          {posts.map((post, i) => (
+            <motion.article
               key={post.id}
-              className="group flex flex-col rounded-3xl bg-white  overflow-hidden transition"
+              className="group flex flex-col rounded-3xl bg-white overflow-hidden"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.8,
+                delay: i * 0.2,
+                ease: [0.25, 1, 0.5, 1],
+              }}
+              viewport={{ once: true }}
+              style={{ willChange: "opacity, transform" }}
             >
               <div className="relative overflow-hidden rounded-xl">
-                <img
+                <motion.img
                   src={post.image}
                   alt={post.title}
-                  style={{willChange: "transform"}}
-                  className="w-full group-hover:scale-110 h-56 md:h-64 object-cover transition ease-in-out duration-500"
+                  className="w-full h-56 md:h-64 object-cover"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: [0.25, 1, 0.5, 1],
+                  }}
+                  style={{ willChange: "transform" }}
                 />
               </div>
               <div className="p-2 md:p-3 flex flex-col gap-3 mt-2">
@@ -78,7 +100,7 @@ const Blogs = () => {
                   {post.excerpt}
                 </p>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>

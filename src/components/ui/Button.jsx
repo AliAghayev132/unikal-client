@@ -6,7 +6,7 @@ const Button = ({ text, variant, isLink = false, href }) => {
     return (
       <Link
         href={href}
-        className={`cursor-pointer sm:text-base text-[14px] sm:px-6 px-4 sm:py-4 py-3 rounded-full ${
+        className={`cursor-pointer text-center sm:text-base text-[14px] sm:px-6 px-4 sm:py-4 py-3 rounded-full ${
           variant === "outline"
             ? "bg-white text-[#0a3af8] hover:bg-[#0a3af8] hover:text-white border border-primary"
             : "bg-[#0a3af8] text-white hover:bg-white hover:text-[#0a3af8] border border-[#0a3af8]"

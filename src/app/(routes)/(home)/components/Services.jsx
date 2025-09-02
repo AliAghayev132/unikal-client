@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -7,8 +6,16 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { Stethoscope, Baby, Brain, Bone, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Stethoscope,
+  Baby,
+  Brain,
+  Bone,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import Button from "@/components/ui/Button";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -47,15 +54,21 @@ const Services = () => {
   return (
     <div className="wrapper mx-auto py-12 md:py-16 px-4 md:px-6">
       {/* Header */}
-      <div className="flex items-start md:items-center justify-between gap-4 md:gap-6 mb-8 md:mb-10">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight text-slate-900">
+      <motion.div
+        className="flex items-start md:items-center justify-between gap-4 md:gap-6 mb-8 md:mb-10"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
+        viewport={{ once: true }}
+      >
+        <h2 className="text-3xl md:text-4xl font-semibold leading-tight text-slate-900">
           Ailənizin Sağlamlığı Üçün Tam
           <br className="hidden md:block" /> Tibbi Xidmətlər
         </h2>
-       <div className="hidden sm:block">
-         <Button text="Ətraflı Bax" variant="default" />
-       </div>
-      </div>
+        <div className="hidden sm:block">
+          <Button text="Ətraflı Bax" variant="default" />
+        </div>
+      </motion.div>
 
       {/* Slider */}
       <Swiper
@@ -65,30 +78,47 @@ const Services = () => {
         navigation={{ nextEl: ".services-next", prevEl: ".services-prev" }}
         pagination={{ el: ".services-pagination", clickable: true }}
         breakpoints={{
-      
           1280: { slidesPerView: 4 },
         }}
         className="pb-10 md:pb-12"
       >
-        {services.map((service) => (
+        {services.map((service, i) => (
           <SwiperSlide key={service.id}>
-            <div className="h-full rounded-3xl border border-slate-200/80 bg-white p-5 md:p-6 shadow-sm transition hover:shadow-md">
+            <motion.div
+              className="h-full rounded-3xl border border-slate-200/80 bg-white p-5 md:p-6 shadow-sm hover:shadow-md"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.7,
+                delay: i * 0.15,
+                ease: [0.25, 1, 0.5, 1],
+              }}
+              viewport={{ once: true }}
+            >
               <div className="mx-auto mb-4 grid place-items-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-50 ring-1 ring-indigo-100">
                   {service.icon}
                 </div>
               </div>
-              <h3 className="text-lg font-semibold text-slate-900 text-center mb-2">{service.title}</h3>
-              <p className="text-slate-600 text-sm text-center mb-4 min-h-12">{service.desc}</p>
+              <h3 className="text-lg font-semibold text-slate-900 text-center mb-2">
+                {service.title}
+              </h3>
+              <p className="text-slate-600 text-sm text-center mb-4 min-h-12">
+                {service.desc}
+              </p>
               <div className="flex justify-center">
                 <button className="group inline-flex items-center gap-2 text-primary font-medium text-sm">
                   Ətraflı
-                  <span className="transition-transform group-hover:translate-x-0.5">
+                  <motion.span
+                    initial={{ x: 0 }}
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+                  >
                     →
-                  </span>
+                  </motion.span>
                 </button>
               </div>
-            </div>
+            </motion.div>
           </SwiperSlide>
         ))}
       </Swiper>

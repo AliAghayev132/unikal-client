@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 const itemVariants = {
@@ -10,9 +11,9 @@ const ServiceCard = ({ service }) => {
   return (
     <motion.article
       variants={itemVariants}
-      className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition"
+      className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md "
     >
-      <div className="flex flex-col items-start gap-4">
+      <Link href={`/services/${service.slug}`} className="flex flex-col items-start gap-4">
         <div className="shrink-0 rounded-2xl">
           <div className="relative h-20 w-20 overflow-hidden rounded-xl">
             <Image src={service.icon} alt={service.title} fill className="object-cover" />
@@ -21,12 +22,11 @@ const ServiceCard = ({ service }) => {
         <div>
           <h3 className="text-xl font-semibold text-slate-900">{service.title}</h3>
           <p className="mt-2 text-slate-600 leading-relaxed">{service.description}</p>
-          {/* <button className="mt-6 inline-flex items-center gap-2 text-primary text-sm font-medium">
-            Daha ətraflı
-            <span aria-hidden>↗</span>
-          </button> */}
+          <span className="mt-6 inline-flex items-center gap-2 text-primary text-sm font-medium">
+            Daha ətraflı ↗
+          </span>
         </div>
-      </div>
+      </Link>
     </motion.article>
   );
 };

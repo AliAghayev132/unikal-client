@@ -4,6 +4,7 @@ import ourMissionImg from "@/assets/sections/ourmission.jpg";
 import heroImg from "@/assets/unikal_esas.jpg";
 import Grid from "./components/Grid";
 import ContactNow from "../about/components/ContactNow";
+import { TextAnimation } from "@/components/ui/Animations";
 
 const posts = [
   {
@@ -70,13 +71,17 @@ function Blogs() {
           <span className="block text-xs md:text-sm font-semibold tracking-wider text-neutral-500 uppercase mb-2">
             Bloqlarımız
           </span>
+          <TextAnimation>
           <h1 className="text-4xl md:text-5xl font-bold mb-3">
             Son Xəbərlər və Yeniliklər
           </h1>
+          </TextAnimation>
+          <TextAnimation delay={0.2}>
           <p className="text-neutral-600 md:text-lg">
             Sağlamlıqla bağlı faydalı məqalələr, klinikamızdan xəbərlər və ən
             son yeniliklər — hamısı burada sizi gözləyir.
           </p>
+          </TextAnimation>
         </div>
       </section>
 

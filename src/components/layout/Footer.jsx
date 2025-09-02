@@ -50,7 +50,7 @@ const Footer = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {/* Logo and description section */}
-          <motion.div variants={itemVariants} className="flex flex-col gap-y-6 sm:items-start items-center">
+          <motion.div style={{ willChange: " transform" }} variants={itemVariants} className="flex flex-col gap-y-6 sm:items-start items-center">
             <motion.div 
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300 }}
@@ -69,6 +69,7 @@ const Footer = () => {
             <motion.div 
               variants={itemVariants}
               className="flex space-x-4 pt-2"
+              style={{ willChange: "opacity, transform" }}
             >
               {[
                 { icon: <FaFacebookF />, href: "https://facebook.com" },
@@ -92,16 +93,16 @@ const Footer = () => {
           </motion.div>
 
           {/* Hospital links */}
-          <motion.div variants={itemVariants} className="space-y-4">
+          <motion.div variants={itemVariants} style={{ willChange: "opacity, transform" }} className="space-y-4">
             <h3 className="text-lg font-semibold mb-4 border-b border-blue-500 pb-2 inline-block">
               Hospitalımız
             </h3>
             <ul className="space-y-3">
               {[
                 { name: "Haqqımızda", href: "/about" },
-                { name: "Şöbələr", href: "/services" },
+                // { name: "Şöbələr", href: "/services" },
                 { name: "Həkimlərimiz", href: "/doctors" },
-                { name: "Qəbula Yazıl", href: "/appointment" }
+                { name: "Vakansiyalar", href: "/vacancies" }
               ].map((link, index) => (
                 <motion.li 
                   key={index}
@@ -117,16 +118,17 @@ const Footer = () => {
           </motion.div>
 
           {/* Resources links */}
-          <motion.div variants={itemVariants} className="space-y-4">
+          <motion.div variants={itemVariants} style={{ willChange: "opacity, transform" }} className="space-y-4">
             <h3 className="text-lg font-semibold mb-4 border-b border-blue-500 pb-2 inline-block">
               Xidmətlər
             </h3>
             <ul className="space-y-3">
               {[
-                { name: "Xəbərlər", href: "/blog" },
-                { name: "Tez-tez verilən suallar", href: "/faq" },
-                { name: "Qiymətlər", href: "/prices" },
-                { name: "Sığorta", href: "/insurance" }
+                { name: "Xidmətlər", href: "/services" },
+
+                { name: "Xəbərlər", href: "/blogs" },
+                // { name: "Tez-tez verilən suallar", href: "/faq" },
+                { name: "Qəbula Yazıl", href: "/contact" }
               ].map((link, index) => (
                 <motion.li 
                   key={index}
@@ -142,7 +144,7 @@ const Footer = () => {
           </motion.div>
 
           {/* Contact information */}
-          <motion.div variants={itemVariants} className="space-y-4">
+          <motion.div variants={itemVariants} style={{ willChange: "opacity, transform" }} className="space-y-4">
             <h3 className="text-lg font-semibold mb-4 border-b border-blue-500 pb-2 inline-block">
               Əlaqə
             </h3>
@@ -180,6 +182,7 @@ const Footer = () => {
         <motion.div 
           variants={containerVariants}
           className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400"
+          style={{ willChange: "opacity, transform" }}
         >
           <motion.p variants={itemVariants}>
             © {new Date().getFullYear()} Unikal Klinika tərəfindən bütün hüquqlar qorunur.
