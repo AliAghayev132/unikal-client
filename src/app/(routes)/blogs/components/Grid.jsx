@@ -4,7 +4,7 @@ import { ContainerAnimation, ItemAnimation, TextAnimation } from "@/components/u
 
 const Grid = ({ posts }) => {
   return (
-    <section className="wrapper pb-16 md:pb-20">
+    <section className="wrapper pb-16 md:pb-20 mt-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {posts.map((post,index) => (
           <ContainerAnimation key={index} delay={index * 0.1}>

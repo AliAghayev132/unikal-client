@@ -7,7 +7,7 @@ import { GridAnimation, ItemAnimation, TextAnimation } from "@/components/ui/Ani
 
 const Header = () => {
   return (
-    <section className="w-full h-[70vh] py-10 md:py-14 lg:py-16">
+    <section className="w-full min-h-[60vh] md:min-h-[70vh] py-10 md:py-14 lg:py-16">
       <div className="wrapper">
         {/* Top content: left title block, right description + CTA */}
         <TextAnimation>

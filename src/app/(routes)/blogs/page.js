@@ -67,12 +67,14 @@ function Blogs() {
   return (
     <main className="w-full">
       {/* Header */}
-      <PageHeaders
-        title="Bloqlarımız"
-        subtitle1="Son Xəbərlər və"
-        subtitle2="Yeniliklər"
-        description="Sağlamlıqla bağlı faydalı məqalələr, klinikamızdan xəbərlər və ən son yeniliklər — hamısı burada sizi gözləyir."
-      />
+      <header className="wrapper">
+        <PageHeaders
+          title="Bloqlarımız"
+          subtitle1="Son Xəbərlər və"
+          subtitle2="Yeniliklər"
+          description="Sağlamlıqla bağlı faydalı məqalələr, klinikamızdan xəbərlər və ən son yeniliklər — hamısı burada sizi gözləyir."
+        />
+      </header>
 
       {/* Grid */}
       <Grid posts={posts} />

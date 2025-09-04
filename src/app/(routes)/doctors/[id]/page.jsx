@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { getDoctorById } from "@/data/doctors";
 
 export default function DoctorProfilePage({ params }) {
-  const { id } = params || {};
+  const { id } = React.use(params || {});
   const doctor = getDoctorById(id);
 
   if (!doctor) {

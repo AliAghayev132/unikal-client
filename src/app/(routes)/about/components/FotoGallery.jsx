@@ -65,6 +65,7 @@ const FotoGallery = () => {
             alt={img.alt}
             className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
             placeholder="blur"
+            style={{willChange: "transform"}}
           />
         </PhotoView>
       </motion.div>

@@ -17,7 +17,7 @@ const ServiceCard = ({ service }) => {
       <Link href={`/services/${service.slug}`} className="flex flex-col items-start gap-4 h-full">
         <div className="shrink-0 rounded-2xl">
           <div className="relative h-20 w-20 overflow-hidden rounded-xl">
-            <Image src={service.icon} alt={service.title} fill className="object-cover" />
+            <Image src={service.icon} alt={service.title} className="object-cover w-full h-full" width={80} height={80} />
           </div>
         </div>
         <div>

@@ -31,7 +31,7 @@ const Navbar = () => {
         {/* Left: Logo */}
         <div className="flex items-center gap-10">
           <Link href="/">
-            <div className="lg:w-[140px] w-[110px]">
+            <div className="lg:w-[140px] w-[120px]">
               <Image priority src={logo} alt="Logo" width={140} height={140} />
             </div>
           </Link>
@@ -189,7 +189,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden text-gray-800 mr-3"
+          className="lg:hidden text-gray-800 mr-1"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -210,11 +210,13 @@ const Navbar = () => {
           >
         {/* Header of mobile menu */}
         <div className="flex items-center justify-between px-6 py-6 ">
-          <Link href="/" className="sm:w-[140px] w-[110px]">
+          <Link href="/" className="sm:w-[140px] w-[120px]">
             <Image
               priority
               src={logo}
               alt="Logo"
+              width={256}
+              height={91}
              className="w-full h-full object-contain"
             />
           </Link>

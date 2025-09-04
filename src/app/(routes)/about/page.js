@@ -14,7 +14,7 @@ export const metadata = {
 
 function About() {
     return (
-        <main>
+        <main className="overflow-hidden">
             <Header />
             <OurMission />
             <BestService />
