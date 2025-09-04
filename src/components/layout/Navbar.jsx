@@ -2,13 +2,20 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/unikal-logo.png";
 import phone from "@/assets/phone.jpg";
 import Button from "../ui/Button";
+import { services } from "@/data/services";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  // Desktop hover states for animated dropdowns
+  const [aboutHover, setAboutHover] = useState(false);
+  const [servicesHover, setServicesHover] = useState(false);
 
   const navLinks = [
     { href: "/", label: "Ana Səhifə" },
@@ -24,36 +31,160 @@ const Navbar = () => {
         {/* Left: Logo */}
         <div className="flex items-center gap-10">
           <Link href="/">
-          <div className="sm:w-[140px] w-[110px]">
-            <Image priority src={logo} alt="Logo" width={140} height={140} />
-          </div>
+            <div className="lg:w-[140px] w-[110px]">
+              <Image priority src={logo} alt="Logo" width={140} height={140} />
+            </div>
           </Link>
           {/* Desktop Links */}
-          <div className="hidden md:flex gap-10 ml-7">
-            {navLinks.map((link) => (
+          <div className="hidden lg:flex h-full w-full items-center gap-6 ml-7">
+            {/* Ana Səhifə */}
+            <Link
+              href="/"
+              className="text-gray-700 hover:text-[#0a3af8] font-medium transition"
+            >
+              Ana Səhifə
+            </Link>
+
+            {/* Haqqımızda Dropdown (Animated) */}
+            <div
+              className="relative"
+              onMouseEnter={() => setAboutHover(true)}
+              onMouseLeave={() => setAboutHover(false)}
+            >
               <Link
-                key={link.href}
-                href={link.href}
-                className="text-gray-700 hover:text-[#0a3af8] font-medium transition"
+                href="/about"
+                
+                className="flex py-4 items-center gap-1 text-gray-700 hover:text-[#0a3af8] font-medium transition"
               >
-                {link.label}
+                Haqqımızda
+                <ChevronDown size={16} className="mt-[2px]" />
               </Link>
-            ))}
+              <AnimatePresence>
+                {aboutHover && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                    transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute left-1/2 -translate-x-1/2 top-full mt-0 z-40"
+                  >
+                    <div className="w-56 rounded-xl border border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-xl p-2">
+                      <Link
+                        href="/about"
+                        className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50"
+                      >
+                        Haqqımızda
+                      </Link>
+                      <Link
+                        href="/careers"
+                        className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50"
+                      >
+                        Karyera
+                      </Link>
+                      <Link
+                        href="/doctors"
+                        className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50"
+                      >
+                        Həkimlər
+                      </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Xidmətlər Dropdown (Animated) */}
+            <div
+              className="relative"
+              onMouseEnter={() => setServicesHover(true)}
+              onMouseLeave={() => setServicesHover(false)}
+            >
+              <Link
+                href="/services"
+                className="flex py-4 items-center gap-1 text-gray-700 hover:text-[#0a3af8] font-medium transition"
+              >
+                Xidmətlər
+                <ChevronDown size={16} className="mt-[2px]" />
+              </Link>
+              <AnimatePresence>
+                {servicesHover && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                    transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 z-40"
+                  >
+                    <div className="min-w-[560px] rounded-xl border border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-2xl p-4">
+                      <div className="grid grid-cols-2 gap-2">
+                        {services.map((s) => (
+                          <Link
+                            key={s.id}
+                            href={`/services/${s.slug}`}
+                            className="group/item flex items-start gap-3 rounded-lg p-3 transition hover:bg-slate-50"
+                          >
+                            <div className="h-16 w-16 rounded-lg flex items-start justify-center text-indigo-600 text-sm font-semibold">
+                              <Image
+                                src={s.icon}
+                                alt={s.title}
+                                width={40}
+                                height={40}
+                              />
+                            </div>
+                            <div>
+                              <div className="text-sm font-medium text-slate-800 group-hover/item:text-[#0a3af8]">
+                                {s.title}
+                              </div>
+                              {s.description && (
+                                <p className="text-xs text-slate-500 line-clamp-2">
+                                  {s.description}
+                                </p>
+                              )}
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Xəbərlər */}
+            <Link
+              href="/blogs"
+              className="text-gray-700 hover:text-[#0a3af8] font-medium transition"
+            >
+              Xəbərlər
+            </Link>
+
+            {/* Əlaqə */}
+            <Link
+              href="/contact"
+              className="text-gray-700 hover:text-[#0a3af8] font-medium transition"
+            >
+              Əlaqə
+            </Link>
           </div>
         </div>
 
         {/* Right: Call + Button (Desktop) */}
-        <div className="hidden md:flex items-center gap-5">
+        <div className="hidden lg:flex items-center gap-5">
           <div className="flex items-center">
             <Image priority src={phone} alt="Phone" width={40} height={40} />
             <h2 className="text-2xl font-semibold text-gray-800">*5005</h2>
           </div>
-          <Button text="Qəbula Yazılın" variant="default" isLink href="/contact" />
+          <Button
+            text="Qəbula Yazılın"
+            variant="default"
+            isLink
+            href="/contact"
+          />
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-gray-800 mr-3"
+          className="lg:hidden text-gray-800 mr-3"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -61,15 +192,26 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`fixed top-0 right-0 h-dvh w-72 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50 flex flex-col ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
+      <AnimatePresence>
+        {isOpen && (
+          <motion.aside
+            key="mobile-menu"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed top-0 right-0 h-dvh w-80 bg-white shadow-2xl z-50 flex flex-col overflow-y-auto border-l border-slate-200"
+          >
         {/* Header of mobile menu */}
-        <div className="flex items-center justify-between px-6 py-6">
+        <div className="flex items-center justify-between px-6 py-6 bg-gradient-to-b from-white to-slate-50 ">
           <Link href="/" className="sm:w-[140px] w-[110px]">
-            <Image priority src={logo} alt="Logo" width={"auto"} height={"auto"} />
+            <Image
+              priority
+              src={logo}
+              alt="Logo"
+              width={"auto"}
+              height={"auto"}
+            />
           </Link>
           <button onClick={() => setIsOpen(false)}>
             <X size={28} className="text-gray-800" />
@@ -77,36 +219,154 @@ const Navbar = () => {
         </div>
 
         {/* Links */}
-        <div className="flex flex-col gap-6 px-6 py-6">
-          {navLinks.map((link) => (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col gap-1 px-6 py-4"
+        >
+          {/* Ana Səhifə */}
+          <Link
+            href="/"
+            onClick={() => setIsOpen(false)}
+            className="text-slate-700 text-lg font-medium py-2 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1 transition"
+          >
+            Ana Səhifə
+          </Link>
+
+          {/* Haqqımızda (Accordion) */}
+          <div>
+            <div className="flex items-center justify-between">
+              <Link
+                href="/about"
+                onClick={() => setIsOpen(false)}
+                className="text-slate-700 text-lg font-medium py-2 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1 transition"
+              >
+                Haqqımızda
+              </Link>
+              <button
+                aria-label="Haqqımızda alt menyunu aç"
+                onClick={() => setAboutOpen((v) => !v)}
+                className="p-2 text-gray-700"
+              >
+                <ChevronDown className={`${aboutOpen ? "rotate-180" : "rotate-0"} transition-transform`} size={20} />
+              </button>
+            </div>
+            <AnimatePresence initial={false}>
+              {aboutOpen && (
+                <motion.div
+                  key="about-acc"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="ml-2 pl-2 mt-1 flex flex-col overflow-hidden"
+                >
+                  <Link href="/about" onClick={() => setIsOpen(false)} className="py-2 text-slate-700 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1">Haqqımızda</Link>
+                  <Link href="/careers" onClick={() => setIsOpen(false)} className="py-2 text-slate-700 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1">Karyera</Link>
+                  <Link href="/doctors" onClick={() => setIsOpen(false)} className="py-2 text-slate-700 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1">Həkimlər</Link>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Xidmətlər (Accordion) */}
+          <div>
+            <div className="flex items-center justify-between">
+              <Link
+                href="/services"
+                onClick={() => setIsOpen(false)}
+                className="text-slate-700 text-lg font-medium py-2 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1 transition"
+              >
+                Xidmətlər
+              </Link>
+              <button
+                aria-label="Xidmətlər alt menyunu aç"
+                onClick={() => setServicesOpen((v) => !v)}
+                className="p-2 text-gray-700"
+              >
+                <ChevronDown className={`${servicesOpen ? "rotate-180" : "rotate-0"} transition-transform`} size={20} />
+              </button>
+            </div>
+            <AnimatePresence initial={false}>
+              {servicesOpen && (
+                <motion.div
+                  key="services-acc"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="ml-2 pl-2 mt-1 flex flex-col overflow-hidden"
+                >
+                  {services.map((s) => (
+                    <Link
+                      key={s.id}
+                      href={`/services/${s.slug}`}
+                      onClick={() => setIsOpen(false)}
+                      className="py-2 text-slate-700 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1"
+                    >
+                      {s.title}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Xəbərlər */}
+          <div className="pt-2">
             <Link
-              key={link.href}
-              href={link.href}
+              href="/blogs"
               onClick={() => setIsOpen(false)}
-              className="text-gray-700 text-lg font-medium hover:text-indigo-600 transition"
+              className="text-slate-700 text-lg font-medium py-2 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1 transition"
             >
-              {link.label}
+              Xəbərlər
             </Link>
-          ))}
-        </div>
+          </div>
+
+          {/* Əlaqə */}
+          <div className="pt-2">
+            <Link
+              href="/contact"
+              onClick={() => setIsOpen(false)}
+              className="text-slate-700 text-lg font-medium py-2 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1 transition"
+            >
+              Əlaqə
+            </Link>
+          </div>
+        </motion.div>
 
         {/* Bottom Call + Button */}
-        <div className="mt-auto flex flex-col gap-4 px-8 py-6">
+        <div className="mt-auto flex flex-col gap-4 px-8 py-6 bg-slate-50/60">
           <div className="flex items-center justify-center">
             <Image priority src={phone} alt="Phone" width={40} height={40} />
             <h2 className="text-xl font-semibold text-gray-800">*5005</h2>
           </div>
-          <Button text="Qəbula Yazılın" isLink href="/contact" variant="default" />
+          <Button
+            text="Qəbula Yazılın"
+            isLink
+            href="/contact"
+            variant="default"
+          />
         </div>
-      </div>
+          </motion.aside>
+        )}
+      </AnimatePresence>
 
       {/* Overlay when menu is open */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            key="overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+            onClick={() => setIsOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

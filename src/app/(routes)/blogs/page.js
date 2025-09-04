@@ -5,6 +5,7 @@ import heroImg from "@/assets/unikal_esas.jpg";
 import Grid from "./components/Grid";
 import ContactNow from "../about/components/ContactNow";
 import { TextAnimation } from "@/components/ui/Animations";
+import PageHeaders from "@/components/common/PageHeaders";
 
 const posts = [
   {
@@ -57,37 +58,25 @@ const posts = [
 ];
 
 export const metadata = {
-    title: "Xəbərlər",
-    description: "Xəbərlər",
-    keywords: ["Xəbərlər"]
-  };
+  title: "Xəbərlər",
+  description: "Xəbərlər",
+  keywords: ["Xəbərlər"],
+};
 
 function Blogs() {
   return (
     <main className="w-full">
       {/* Header */}
-      <section className="wrapper py-10 md:py-14 lg:py-16">
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="block text-xs md:text-sm font-semibold tracking-wider text-neutral-500 uppercase mb-2">
-            Bloqlarımız
-          </span>
-          <TextAnimation>
-          <h1 className="text-4xl md:text-5xl font-bold mb-3">
-            Son Xəbərlər və Yeniliklər
-          </h1>
-          </TextAnimation>
-          <TextAnimation delay={0.2}>
-          <p className="text-neutral-600 md:text-lg">
-            Sağlamlıqla bağlı faydalı məqalələr, klinikamızdan xəbərlər və ən
-            son yeniliklər — hamısı burada sizi gözləyir.
-          </p>
-          </TextAnimation>
-        </div>
-      </section>
+      <PageHeaders
+        title="Bloqlarımız"
+        subtitle1="Son Xəbərlər və"
+        subtitle2="Yeniliklər"
+        description="Sağlamlıqla bağlı faydalı məqalələr, klinikamızdan xəbərlər və ən son yeniliklər — hamısı burada sizi gözləyir."
+      />
 
       {/* Grid */}
       <Grid posts={posts} />
-      <ContactNow/>
+      <ContactNow />
     </main>
   );
 }

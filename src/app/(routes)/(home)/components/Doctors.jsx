@@ -5,15 +5,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Linkedin, Globe, X, Dribbble } from "lucide-react";
 import doctorImg from "@/assets/doctors/doctor.png"; // placeholder for all cards for now
+import { doctors } from "@/data/doctors";
+import DoctorItem from "@/components/common/DoctorItem";
 
-const doctors = [
-  { id: 1, name: "Dr. Aynur Hüseynli", role: "Endokrinoloq" },
-  { id: 2, name: "Dr. Fəriz Rzayev", role: "Stomatoloq" },
-  { id: 3, name: "Dr. Ülviyyə Abbasova", role: "Ginekoloq" },
-  { id: 4, name: "Dr. John Smith", role: "Kardioloq" },
-  { id: 5, name: "Dr. James Wilson", role: "Dermatoloq" },
-  { id: 6, name: "Dr. Jennifer Lee", role: "Psixiatr" },
-];
 
 // Parent container animasiya
 const container = {
@@ -31,6 +25,7 @@ const item = {
 };
 
 const Doctors = () => {
+
   return (
     <section className="wrapper mx-auto py-12 md:py-16">
       {/* Başlıq */}
@@ -54,64 +49,10 @@ const Doctors = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 md:gap-x-8 md:gap-y-16"
+        className=" max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 md:gap-x-8 md:gap-y-16"
       >
         {doctors.map((d) => (
-          <motion.div
-            key={d.id}
-            variants={item}
-            whileHover={{ y: -6, transition: { duration: 0.3, ease: [0.25, 1, 0.5, 1] } }}
-            className="flex flex-col items-center"
-            style={{willChange: "transform"}}
-          >
-            {/* Avatar */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-              className="sm:-mb-4 -mb-3 z-10"
-            >
-              <div className="h-36 w-36 md:h-44 md:w-44 overflow-hidden rounded-2xl bg-indigo-50 ring-1 ring-indigo-100 grid place-items-center">
-                <Image
-                  src={doctorImg}
-                  alt={d.name}
-                  className="h-full w-full object-cover"
-                  width={250}
-                  height={250}
-                  priority={false}
-                />
-              </div>
-            </motion.div>
-
-            {/* Kart */}
-            <motion.div
-              whileHover={{ boxShadow: "0px 10px 25px rgba(0,0,0,0.1)" }}
-              transition={{ duration: 0.3 }}
-              className="w-full rounded-3xl border border-slate-200/80 bg-white p-6 text-center shadow-sm max-w-sm"
-            >
-              <h3 className="text-lg font-semibold text-slate-900">{d.name}</h3>
-              <p className="text-slate-600 text-sm">{d.role}</p>
-              <p className="mt-3 text-slate-600 text-sm leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam molestiae
-                mattis eros.
-              </p>
-
-              {/* Sosial Linklər */}
-              <div className="mt-4 flex items-center justify-center gap-4 text-slate-700">
-                <a href="#" aria-label="LinkedIn" className="hover:text-slate-900">
-                  <Linkedin size={18} />
-                </a>
-                <a href="#" aria-label="Website" className="hover:text-slate-900">
-                  <Globe size={18} />
-                </a>
-                <a href="#" aria-label="X" className="hover:text-slate-900">
-                  <X size={18} />
-                </a>
-                <a href="#" aria-label="Dribbble" className="hover:text-slate-900">
-                  <Dribbble size={18} />
-                </a>
-              </div>
-            </motion.div>
-          </motion.div>
+         <DoctorItem isHome key={d.id} doctor={d} />
         ))}
       </motion.div>
     </section>

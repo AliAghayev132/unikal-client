@@ -2,14 +2,20 @@
 import React from "react";
 import Image from "next/image";
 import pasa_heyat from "@/assets/partners/pasa_heyat.jpg";
+import xalq from "@/assets/partners/xalq.jpg";
+import ASS from "@/assets/partners/ass.png";
+import atasigorta from "@/assets/partners/ata_sigorta.jpg";
+import atesgah from "@/assets/partners/atesgah.jpg";
+import qala from "@/assets/partners/qala.jpg";
 
 const Partners = () => {
   const logos = [
-    { id: 1, src: pasa_heyat, alt: "Amazon" },
-    { id: 2, src: pasa_heyat, alt: "Google" },
-    { id: 3, src: pasa_heyat, alt: "Apple" },
-    { id: 4, src: pasa_heyat, alt: "Microsoft" },
-    { id: 5, src: pasa_heyat, alt: "Spotify" },
+    { id: 1, src: pasa_heyat, alt: "Pasa Heyat" },
+    { id: 2, src: xalq, alt: "Xalq Sigorta" },
+    { id: 3, src: ASS, alt: "ASS" },
+    { id: 4, src: atasigorta, alt: "Ata Sigorta" },
+    { id: 5, src: qala, alt: "Qala" },
+    { id: 6, src: atesgah, alt: "Atesgah" },
   ];
 
   return (
@@ -20,7 +26,7 @@ const Partners = () => {
 
       {/* Scroll Container */}
       <div className="overflow-hidden relative">
-        <div className="flex gap-16 animate-scroll whitespace-nowrap">
+        <div className="flex items-center gap-16 animate-scroll whitespace-nowrap">
           {logos.concat(logos).map((logo) => (
             <div key={logo.id + Math.random()} className="flex-shrink-0">
               <Image

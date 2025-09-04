@@ -91,7 +91,7 @@ const BestService = () => {
 
         {/* Mobile Image */}
         <motion.div
-          className="relative max-w-[600px] lg:hidden block"
+          className="relative w-full lg:hidden block"
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}

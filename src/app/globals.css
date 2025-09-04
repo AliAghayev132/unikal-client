@@ -3,7 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --primary: #0a3af8;
+  --primary: #3966b0;
 }
 
 .bg-primary{
@@ -12,6 +12,10 @@
 
 .text-primary{
   color: var(--primary);
+}
+
+.border-primary{
+  border-color: var(--primary);
 }
 
 .wrapper{

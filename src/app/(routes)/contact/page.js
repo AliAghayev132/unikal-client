@@ -1,28 +1,33 @@
-import React from 'react'
-import Button from '@/components/ui/Button'
-import Header from './components/Header';
-import ContactForm from './components/ContactForm';
-import InfoCards from './components/InfoCards';
+import React from "react";
+import Button from "@/components/ui/Button";
+import ContactForm from "./components/ContactForm";
+import InfoCards from "./components/InfoCards";
+import PageHeaders from "@/components/common/PageHeaders";
 
 export const metadata = {
-    title: "Əlaqə",
-    description: "Əlaqə",
-    keywords: ["Əlaqə"]
-  };
+  title: "Əlaqə",
+  description: "Əlaqə",
+  keywords: ["Əlaqə"],
+};
 
 const ContactPage = () => {
   return (
     <main className="w-full">
       {/* Header */}
-   <Header/>
+      <PageHeaders
+        title="Qəbul"
+        subtitle1="Qəbul"
+        subtitle2="üçün yazılın"
+        description="Həkim qəbuluna yazılaraq sağlamlığınızı vaxtında nəzarətdə saxlayın. Peşəkar komandamızla dəqiq diaqnoz və effektiv müalicə üçün ilk addımı indi atın."
+      />
 
       {/* Form Card */}
-   <ContactForm/>
+      <ContactForm />
 
       {/* Info cards */}
-   <InfoCards/>
+      <InfoCards />
     </main>
-  )
-}
+  );
+};
 
-export default ContactPage
+export default ContactPage;

@@ -17,7 +17,7 @@ const Header = () => {
           transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
         >
           <motion.h1
-            className="text-4xl md:text-5xl font-semibold leading-snug mb-6"
+            className="text-4xl md:text-5xl font-semibold leading-snug mb-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}

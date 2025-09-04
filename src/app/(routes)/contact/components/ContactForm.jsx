@@ -2,6 +2,7 @@
 import React from 'react'
 import Button from '@/components/ui/Button'
 import { ContainerAnimation } from '@/components/ui/Animations'
+import { doctors } from '@/data/doctors'
 
 const ContactForm = () => {
   return (
@@ -23,6 +24,16 @@ const ContactForm = () => {
         <div className="col-span-1">
           <label className="block text-sm text-slate-600 mb-2">Əlaqə Nömrəsi</label>
           <input type="tel" placeholder="(012) 345 67 89" className="w-full rounded-xl border border-slate-200 focus:border-primary/60 focus:ring-primary/20 ring-2 ring-transparent px-4 py-3 outline-none transition placeholder:text-slate-400" />
+        </div>
+        {/* Doctor select */}
+        <div className="col-span-1">
+          <label className="block text-sm text-slate-600 mb-2">Həkim Seçimi</label>
+          <select className="w-full rounded-xl border border-slate-200 focus:border-primary/60 focus:ring-primary/20 ring-2 ring-transparent px-4 py-3 outline-none transition">
+            <option value="">Həkim seçin</option>
+            {doctors.map((d) => (
+              <option key={d.id} value={d.id}>{`${d.name} — ${d.title}`}</option>
+            ))}
+          </select>
         </div>
         {/* Schedule */}
         <div className="col-span-1">

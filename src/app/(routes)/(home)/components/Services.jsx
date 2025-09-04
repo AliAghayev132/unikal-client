@@ -13,40 +13,44 @@ import {
   Bone,
   ChevronLeft,
   ChevronRight,
+  ArrowRight,
 } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import icon1 from "@/assets/sections/icons/icon1.jpg"
+import icon2 from "@/assets/sections/icons/icon2.jpg"
 
 const services = [
   {
     id: 1,
     title: "Ümumi Tibbi Xidmətlər",
     desc: "Gündəlik sağlamlıq problemlərinin diaqnostikası və müalicəsi, ilkin müayinələr və tibbi məsləhətlər.",
-    icon: <Stethoscope size={40} className="text-indigo-600" />,
+    icon: icon1,
   },
   {
     id: 2,
     title: "Pediatriya",
     desc: "Yeni doğulmuşlardan yeniyetmələrə qədər uşaqların sağlamlığı üçün mütəmadi müayinələr və müalicə.",
-    icon: <Baby size={40} className="text-pink-500" />,
+    icon: icon2,
   },
   {
     id: 3,
     title: "Nevrologiya",
     desc: "Baş beyin və sinir sistemi xəstəliklərinin peşəkar müayinəsi və müalicəsi.",
-    icon: <Brain size={40} className="text-purple-600" />,
+    icon: icon1,
   },
   {
     id: 4,
     title: "Ortopediya",
     desc: "Hərəkət sisteminin sağlamlığı üçün ortopedik müayinə və müalicə xidmətləri.",
-    icon: <Bone size={40} className="text-blue-600" />,
+    icon: icon2,
   },
   {
     id: 5,
     title: "Ortopediya",
     desc: "Hərəkət sisteminin sağlamlığı üçün ortopedik müayinə və müalicə xidmətləri.",
-    icon: <Bone size={40} className="text-blue-600" />,
+    icon: icon1,
   },
 ];
 
@@ -66,7 +70,7 @@ const Services = () => {
           <br className="hidden md:block" /> Tibbi Xidmətlər
         </h2>
         <div className="hidden sm:block">
-          <Button text="Ətraflı Bax" variant="default" />
+          <Button text="Ətraflı Bax" variant="default" href="/services" isLink/>
         </div>
       </motion.div>
 
@@ -80,12 +84,12 @@ const Services = () => {
         breakpoints={{
           1280: { slidesPerView: 4 },
         }}
-        className="pb-10 md:pb-12"
+        className="pb-10 md:pb-12 "
       >
         {services.map((service, i) => (
           <SwiperSlide key={service.id}>
             <motion.div
-              className="h-full rounded-3xl border border-slate-200/80 bg-white p-5 md:p-6 shadow-sm hover:shadow-md"
+              className="h-full mb-2 rounded-3xl border border-slate-200/80 bg-white p-5 md:p-6 shadow-sm hover:shadow-md"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
@@ -96,8 +100,9 @@ const Services = () => {
               viewport={{ once: true }}
             >
               <div className="mx-auto mb-4 grid place-items-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-50 ring-1 ring-indigo-100">
-                  {service.icon}
+                <div className="flex h-20 w-20 items-center justify-center rounded-2xl ">
+                  {/* {service.icon} */}
+                  <Image src={service.icon} alt={service.title} width={80} height={80} className="object-contain" />
                 </div>
               </div>
               <h3 className="text-lg font-semibold text-slate-900 text-center mb-2">
@@ -106,16 +111,17 @@ const Services = () => {
               <p className="text-slate-600 text-sm text-center mb-4 min-h-12">
                 {service.desc}
               </p>
-              <div className="flex justify-center">
-                <button className="group inline-flex items-center gap-2 text-primary font-medium text-sm">
+              <div className="flex justify-center h-full">
+                <button className="group relative inline-flex items-center gap-2 text-primary font-medium text-sm px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40">
                   Ətraflı
-                  <motion.span
-                    initial={{ x: 0 }}
-                    whileHover={{ x: 4 }}
-                    transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+                  <span
+                    //  style={{willChange: "transform"}}
+                    className="inline-block group-hover:pl-2 transition-all duration-300"
                   >
-                    →
-                  </motion.span>
+                    <ArrowRight size={16} />
+                  </span>
+                  {/* underline animasiyası */}
+                  <span className="absolute left-0 -bottom-0.5 w-0 group-hover:w-full h-0.5 bg-primary transition-all duration-300 ease-out rounded" />
                 </button>
               </div>
             </motion.div>

@@ -8,8 +8,8 @@ const Button = ({ text, variant, isLink = false, href }) => {
         href={href}
         className={`cursor-pointer text-center sm:text-base text-[14px] sm:px-6 px-4 sm:py-4 py-3 rounded-full ${
           variant === "outline"
-            ? "bg-white text-[#0a3af8] hover:bg-[#0a3af8] hover:text-white border border-primary"
-            : "bg-[#0a3af8] text-white hover:bg-white hover:text-[#0a3af8] border border-[#0a3af8]"
+            ? "bg-white text-[#3966b0] hover:bg-[#3966b0] hover:text-white border border-primary"
+            : "bg-[#3966b0] text-white hover:bg-white hover:text-[#3966b0] border border-[#3966b0]"
         } font-medium transition duration-500`}
       >
         {text}
@@ -20,8 +20,8 @@ const Button = ({ text, variant, isLink = false, href }) => {
     <button
       className={`cursor-pointer sm:text-base text-[14px] sm:px-6 px-4 sm:py-4 py-3 rounded-full ${
         variant === "outline"
-          ? "bg-white text-[#0a3af8] hover:bg-[#0a3af8] hover:text-white border border-primary"
-          : "bg-[#0a3af8] text-white hover:bg-white hover:text-[#0a3af8] border border-[#0a3af8]"
+          ? "bg-white text-[#3966b0] hover:bg-[#3966b0] hover:text-white border border-primary"
+          : "bg-[#3966b0] text-white hover:bg-white hover:text-[#3966b0] border border-[#3966b0]"
       } font-medium transition duration-500`}
     >
       {text}
