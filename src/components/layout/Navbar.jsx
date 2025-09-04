@@ -174,7 +174,9 @@ const Navbar = () => {
         {/* Right: Call + Button (Desktop) */}
         <div className="hidden lg:flex items-center gap-5">
           <div className="flex items-center">
-            <Image priority src={phone} alt="Phone" width={30} height={30} />
+            <div className="w-[30px] h-[30px]">
+            <Image priority src={phone} alt="Phone" width={30} height={30} className="object-contain w-full h-full"/>
+            </div>
             <h2 className="text-2xl font-semibold text-gray-800">*5005</h2>
           </div>
           <Button
@@ -213,8 +215,7 @@ const Navbar = () => {
               priority
               src={logo}
               alt="Logo"
-              width={"auto"}
-              height={"auto"}
+             className="w-full h-full object-contain"
             />
           </Link>
           <button onClick={() => setIsOpen(false)}>
@@ -345,7 +346,9 @@ const Navbar = () => {
         {/* Bottom Call + Button */}
         <div className="mt-auto flex flex-col gap-4 px-8 py-6 bg-slate-50/60">
           <div className="flex items-center justify-center">
-            <Image priority src={phone} alt="Phone" width={40} height={40} />
+            <div className="w-[30px] h-[30px]">
+            <Image priority src={phone} alt="Phone" width={30} height={30} className="object-contain w-full h-full" />
+            </div>
             <h2 className="text-xl font-semibold text-gray-800">*5005</h2>
           </div>
           <Button

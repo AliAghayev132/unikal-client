@@ -80,6 +80,8 @@ const Blogs = () => {
                 <motion.img
                   src={post.image}
                   alt={post.title}
+                  width={500}
+                  height={500}
                   className="w-full h-56 md:h-64 object-cover"
                   whileHover={{ scale: 1.1 }}
                   transition={{
