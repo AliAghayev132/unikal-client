@@ -65,7 +65,8 @@ const Navbar = () => {
                     initial={{ opacity: 0, y: 6, scale: 0.98 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 6, scale: 0.98 }}
-                    transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                    style={{willChange: "transform"}}
                     className="absolute left-1/2 -translate-x-1/2 top-full mt-0 z-40"
                   >
                     <div className="w-56 rounded-xl border border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-xl p-2">
@@ -112,8 +113,9 @@ const Navbar = () => {
                     initial={{ opacity: 0, y: 6, scale: 0.98 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 6, scale: 0.98 }}
-                    transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                     className="absolute top-full left-1/2 -translate-x-1/2 z-40"
+                    style={{willChange: "transform"}}
                   >
                     <div className="min-w-[560px] rounded-xl border border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-2xl p-4">
                       <div className="grid grid-cols-2 gap-2">
@@ -199,7 +201,8 @@ const Navbar = () => {
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+            style={{willChange: "transform"}}
             className="fixed top-0 right-0 h-dvh w-80 bg-white shadow-2xl z-50 flex flex-col overflow-y-auto border-l border-slate-200"
           >
         {/* Header of mobile menu */}
@@ -260,6 +263,7 @@ const Navbar = () => {
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  style={{willChange: "transform"}}
                   className="ml-2 pl-2 mt-1 flex flex-col overflow-hidden"
                 >
                   <Link href="/about" onClick={() => setIsOpen(false)} className="py-2 text-slate-700 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1">Haqqımızda</Link>
@@ -296,6 +300,7 @@ const Navbar = () => {
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  style={{willChange: "transform"}}
                   className="ml-2 pl-2 mt-1 flex flex-col overflow-hidden"
                 >
                   {services.map((s) => (
