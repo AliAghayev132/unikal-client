@@ -69,8 +69,8 @@ export const Contact = () => {
             transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
             viewport={{ once: true }}
           >
-            <Button text="Qəbula Yazılın" variant="default" className="px-6 py-3 text-base" />
-            <Button text="Mütəxəssislərimiz" variant="outline" className="px-6 py-3 text-base" />
+            <Button text="Qəbula Yazılın" isLink href="/contact" variant="default" className="px-6 py-3 text-base" />
+            <Button text="Mütəxəssislərimiz" isLink href="/doctors" variant="outline" className="px-6 py-3 text-base" />
           </motion.div>
         </motion.div>
       </motion.div>

@@ -28,13 +28,13 @@ const Partners = () => {
       <div className="overflow-hidden relative">
         <div className="flex items-center gap-16 animate-scroll whitespace-nowrap">
           {logos.concat(logos).map((logo) => (
-            <div key={logo.id + Math.random()} className="flex-shrink-0">
+            <div key={logo.id + Math.random()} className="flex-shrink-0 w-[180px]">
               <Image
                 src={logo.src}
                 alt={logo.alt}
                 width={200}
                 height={150}
-                className="object-contain"
+                className="object-contain w-full h-full"
               />
             </div>
           ))}

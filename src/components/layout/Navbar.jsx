@@ -131,6 +131,7 @@ const Navbar = () => {
                                 alt={s.title}
                                 width={40}
                                 height={40}
+                                className="object-contain w-full h-full"
                               />
                             </div>
                             <div>
