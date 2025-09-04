@@ -15,7 +15,7 @@ const Vacancy = ( {job, idx} ) => {
     </div>
     <p className="text-sm text-neutral-500 mb-5">{job.type}</p>
     <div className="flex gap-3">
-      <Button isLink href={job.href} variant="default" text="Müraciət et" />
+      <Button isLink href={`/careers/${job.slug}`} variant="default" text="Müraciət et" />
       <Button isLink href="/contact" variant="outline" text="Əlaqə" />
     </div>
   </div>

@@ -17,7 +17,10 @@ export default function RootLayout({ children }) {
         className={`${inter.variable} antialiased`}
       >
         <Navbar/>
+        <div className="min-h-[88vh]">
+
         {children}
+        </div>
         <Footer/>
       </body>
     </html>
