@@ -5,7 +5,7 @@ import { careers } from "@/data/careers";
 
 function Careers() {
   return (
-    <section className="wrapper py-10 md:py-14 lg:py-16">
+    <section className="wrapper ">
 
       <PageHeaders title="Vakansiyalar" subtitle1={"Komandamıza"} subtitle2={"qoşulun"} description={"Peşəkar və dinamik komandamızda işləmək istəyirsinizsə, uyğun vakansiyaya müraciət edin. Sizi tanımaqdan məmnun olarıq."} />
 

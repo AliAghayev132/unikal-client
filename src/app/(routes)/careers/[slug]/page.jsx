@@ -16,7 +16,7 @@ export default function CareerDetailPage({ params }) {
   if (!job) return notFound();
 
   return (
-    <section className="wrapper py-10 md:py-14 lg:py-16">
+    <section className="wrapper">
       <PageHeaders
         title={job.title}
         subtitle1={"Vakansiya"}

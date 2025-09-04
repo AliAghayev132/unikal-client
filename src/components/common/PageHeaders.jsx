@@ -3,7 +3,7 @@ import { TextAnimation } from '../ui/Animations'
 
 const PageHeaders = ({title,subtitle1 ,subtitle2,description}) => {
   return (
-     <header className=" py-10 md:py-14 lg:py-16">
+     <header className="py-10 md:py-14 lg:py-16">
             <div className="max-w-3xl mx-auto text-center">
               <span className="block text-xs md:text-sm font-semibold tracking-wider text-neutral-500 uppercase mb-2">
                 {title}
