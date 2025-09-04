@@ -93,7 +93,7 @@ export default function ServiceDetail({ params }) {
       </section>
 
       {/* Testimonials */}
-      <section className="wrapper py-14 bg-slate-50 rounded-3xl">
+      {/* <section className="wrapper py-14 bg-slate-50 rounded-3xl">
         <h2 className="text-2xl md:text-3xl font-semibold mb-8">Pasiyent rəyləri</h2>
         <div className="grid gap-6 md:grid-cols-2">
           {testimonials.map((t) => (
@@ -110,7 +110,7 @@ export default function ServiceDetail({ params }) {
             </motion.div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* FAQ */}
       <section className="wrapper py-14">

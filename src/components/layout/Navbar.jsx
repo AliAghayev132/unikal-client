@@ -171,7 +171,7 @@ const Navbar = () => {
         {/* Right: Call + Button (Desktop) */}
         <div className="hidden lg:flex items-center gap-5">
           <div className="flex items-center">
-            <Image priority src={phone} alt="Phone" width={40} height={40} />
+            <Image priority src={phone} alt="Phone" width={30} height={30} />
             <h2 className="text-2xl font-semibold text-gray-800">*5005</h2>
           </div>
           <Button
@@ -203,7 +203,7 @@ const Navbar = () => {
             className="fixed top-0 right-0 h-dvh w-80 bg-white shadow-2xl z-50 flex flex-col overflow-y-auto border-l border-slate-200"
           >
         {/* Header of mobile menu */}
-        <div className="flex items-center justify-between px-6 py-6 bg-gradient-to-b from-white to-slate-50 ">
+        <div className="flex items-center justify-between px-6 py-6 ">
           <Link href="/" className="sm:w-[140px] w-[110px]">
             <Image
               priority
