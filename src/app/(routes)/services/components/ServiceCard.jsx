@@ -24,7 +24,7 @@ const ServiceCard = ({ service }) => {
           <h3 className="text-xl font-semibold text-slate-900">{service.title}</h3>
           <p className="mt-2 text-slate-600 leading-relaxed">{service.description}</p>
         </div>
-                <button className="group mt-auto relative inline-flex items-center gap-2 text-primary font-medium text-sm px-3 py-2 rounded-lg focus:outline-none">
+                <button className="group cursor-pointer mt-auto relative inline-flex items-center gap-2 text-primary font-medium text-sm px-3 py-2 rounded-lg focus:outline-none">
                   Ətraflı
                   <span
                     //  style={{willChange: "transform"}}

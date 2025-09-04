@@ -71,19 +71,19 @@ const Navbar = () => {
                     <div className="w-56 rounded-xl border border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-xl p-2">
                       <Link
                         href="/about"
-                        className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50"
+                        className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#0a3af8] transition"
                       >
                         Haqqımızda
                       </Link>
                       <Link
                         href="/careers"
-                        className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50"
+                        className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#0a3af8] transition"
                       >
                         Karyera
                       </Link>
                       <Link
                         href="/doctors"
-                        className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50"
+                        className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#0a3af8] transition"
                       >
                         Həkimlər
                       </Link>

@@ -6,53 +6,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import {
-  Stethoscope,
-  Baby,
-  Brain,
-  Bone,
-  ChevronLeft,
-  ChevronRight,
-  ArrowRight,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import icon1 from "@/assets/sections/icons/icon1.jpg"
-import icon2 from "@/assets/sections/icons/icon2.jpg"
+import Link from "next/link";
+import { services as servicesData } from "@/data/services";
 
-const services = [
-  {
-    id: 1,
-    title: "Ümumi Tibbi Xidmətlər",
-    desc: "Gündəlik sağlamlıq problemlərinin diaqnostikası və müalicəsi, ilkin müayinələr və tibbi məsləhətlər.",
-    icon: icon1,
-  },
-  {
-    id: 2,
-    title: "Pediatriya",
-    desc: "Yeni doğulmuşlardan yeniyetmələrə qədər uşaqların sağlamlığı üçün mütəmadi müayinələr və müalicə.",
-    icon: icon2,
-  },
-  {
-    id: 3,
-    title: "Nevrologiya",
-    desc: "Baş beyin və sinir sistemi xəstəliklərinin peşəkar müayinəsi və müalicəsi.",
-    icon: icon1,
-  },
-  {
-    id: 4,
-    title: "Ortopediya",
-    desc: "Hərəkət sisteminin sağlamlığı üçün ortopedik müayinə və müalicə xidmətləri.",
-    icon: icon2,
-  },
-  {
-    id: 5,
-    title: "Ortopediya",
-    desc: "Hərəkət sisteminin sağlamlığı üçün ortopedik müayinə və müalicə xidmətləri.",
-    icon: icon1,
-  },
-];
+// Using centralized services data from src/data/services.js
 
 const Services = () => {
   return (
@@ -86,7 +47,7 @@ const Services = () => {
         }}
         className="pb-10 md:pb-12 "
       >
-        {services.map((service, i) => (
+        {servicesData.map((service, i) => (
           <SwiperSlide key={service.id}>
             <motion.div
               className="h-full mb-2 rounded-3xl border border-slate-200/80 bg-white p-5 md:p-6 shadow-sm hover:shadow-md"
@@ -94,10 +55,10 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
                 duration: 0.7,
-                delay: i * 0.15,
                 ease: [0.25, 1, 0.5, 1],
               }}
               viewport={{ once: true }}
+              style={{ willChange: "transform" }}
             >
               <div className="mx-auto mb-4 grid place-items-center">
                 <div className="flex h-20 w-20 items-center justify-center rounded-2xl ">
@@ -109,20 +70,16 @@ const Services = () => {
                 {service.title}
               </h3>
               <p className="text-slate-600 text-sm text-center mb-4 min-h-12">
-                {service.desc}
+                {service.description}
               </p>
               <div className="flex justify-center h-full">
-                <button className="group relative inline-flex items-center gap-2 text-primary font-medium text-sm px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40">
+                <Link href={`/services/${service.slug}`} className="group relative inline-flex items-center gap-2 text-primary font-medium text-sm px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40">
                   Ətraflı
-                  <span
-                    //  style={{willChange: "transform"}}
-                    className="inline-block group-hover:pl-2 transition-all duration-300"
-                  >
+                  <span className="inline-block group-hover:pl-2 transition-all duration-300">
                     <ArrowRight size={16} />
                   </span>
-                  {/* underline animasiyası */}
                   <span className="absolute left-0 -bottom-0.5 w-0 group-hover:w-full h-0.5 bg-primary transition-all duration-300 ease-out rounded" />
-                </button>
+                </Link>
               </div>
             </motion.div>
           </SwiperSlide>
