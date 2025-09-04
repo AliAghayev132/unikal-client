@@ -10,13 +10,13 @@ export function generateStaticParams() {
 }
 
 export default function CareerDetailPage({ params }) {
-  const { slug } = params || {};
+  const { slug } = React.use(params || {});
   const job = getCareerBySlug(slug);
 
   if (!job) return notFound();
 
   return (
-    <section className="wrapper">
+    <section className="wrapper pb-10 md:pb-14">
       <PageHeaders
         title={job.title}
         subtitle1={"Vakansiya"}

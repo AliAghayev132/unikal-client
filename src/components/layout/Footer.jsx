@@ -50,20 +50,21 @@ const Footer = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {/* Logo and description section */}
-          <motion.div style={{ willChange: " transform" }} variants={itemVariants} className="flex flex-col gap-y-6 sm:items-start items-center">
+          <motion.div style={{ willChange: " transform" }} variants={itemVariants} className="flex  flex-col gap-y-6 sm:items-start items-center">
             <motion.div 
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300 }}
+               className='w-[200px]'
             >
               <Image 
                 src={logo} 
                 alt="Unikal Klinika" 
                 width={180} 
                 height={60} 
-                className="object-contain"
+                className="object-contain w-full h-full"
               />
             </motion.div>
-            <p className="text-white text-sm max-w-xs">
+            <p className="text-white text-sm max-w-xs sm:text-start text-center">
               Yenilənmiş xəstəxanamızda müasir tibbi avadanlıqlar, təcrübəli həkim heyəti və pasiyent mərkəzli yanaşma ilə xidmətinizdəyik.
             </p>
             <motion.div 

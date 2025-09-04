@@ -7,6 +7,7 @@ import { Linkedin, Globe, X, Dribbble } from "lucide-react";
 import doctorImg from "@/assets/doctors/doctor.png"; // placeholder for all cards for now
 import { doctors } from "@/data/doctors";
 import DoctorItem from "@/components/common/DoctorItem";
+import Button from "@/components/ui/Button";
 
 
 // Parent container animasiya
@@ -49,12 +50,15 @@ const Doctors = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
-        className=" max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 md:gap-x-8 md:gap-y-16"
+        className=" mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 md:gap-x-8 md:gap-y-16"
       >
-        {doctors.map((d) => (
+        {doctors.slice(0, 4).map((d) => (
          <DoctorItem isHome key={d.id} doctor={d} />
         ))}
       </motion.div>
+      <div className="flex justify-center mt-10">
+      <Button text="Bütün həkimləri göstər" isLink href="/doctors" variant="outline" />
+      </div>
     </section>
   );
 };

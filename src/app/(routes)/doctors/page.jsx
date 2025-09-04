@@ -4,6 +4,7 @@ import { doctors, availableShifts } from "@/data/doctors";
 import { services } from "@/data/services";
 import Doctor from "./components/Doctor";
 import PageHeaders from "@/components/common/PageHeaders";
+import DoctorItem from "@/components/common/DoctorItem";
 
 
 export default function DoctorsPage() {
@@ -86,15 +87,15 @@ export default function DoctorsPage() {
       </section>
 
       {/* Results */}
-      <section className="pb-16 md:pb-20">
+      <section className="pb-16 md:pb-20 mt-10">
         {filtered.length === 0 ? (
           <p className="text-neutral-600">Heç bir nəticə tapılmadı.</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {filtered.map((doc,index) => {
               const service = services.find((s) => s.slug === doc.serviceSlug);
               return (
-              <Doctor key={doc.id} doc={doc} index={index} service={service} />
+              <DoctorItem key={doc.id} doctor={doc} />
               );
             })}
           </div>
