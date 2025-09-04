@@ -192,7 +192,7 @@ const Navbar = () => {
           className="lg:hidden text-gray-800 mr-1"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+           <Menu size={28} />
         </button>
       </div>
 
