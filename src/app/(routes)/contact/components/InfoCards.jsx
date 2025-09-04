@@ -17,8 +17,7 @@ const InfoCards = () => {
         <div className="rounded-2xl border border-white/20 p-6 text-white/90 bg-white/5">
         <ItemAnimation delay={0.2}>
           <h3 className="text-white text-lg font-semibold mb-2">Bizimlə Əlaqə Saxlayın</h3>
-          <p className="text-sm">Qəbul və Məlumat Üçün: +994 50 285 21 75, +994 50 285 21 85</p>
-          <p className="text-sm mt-2">Stasionar Nömrə: (018) 642 46 55</p>
+          <p className="text-sm">Qəbul və Məlumat Üçün: +994 (050) 285 21 85 , +994 (018) 656 52 52</p>
           <p className="text-sm mt-2">Təcili Yardım Xətti: *5005</p>
         </ItemAnimation>
         </div>

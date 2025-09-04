@@ -72,8 +72,8 @@ const Footer = () => {
               style={{ willChange: "opacity, transform" }}
             >
               {[
-                { icon: <FaFacebookF />, href: "https://facebook.com" },
-                { icon: <FaInstagram />, href: "https://instagram.com" },
+                { icon: <FaFacebookF />, href: "https://www.facebook.com/UnikalKlinika" },
+                { icon: <FaInstagram />, href: "https://www.instagram.com/unikal_klinika_sumqayit" },
                 { icon: <FaTiktok />, href: "https://tiktok.com" },
               ].map((social, index) => (
                 <motion.a
@@ -165,7 +165,7 @@ const Footer = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span className="text-white">info@unikalklinika.az</span>
+                <span className="text-white">unicalclinica@gmail.com</span>
               </li>
             </ul>
           </motion.div>
