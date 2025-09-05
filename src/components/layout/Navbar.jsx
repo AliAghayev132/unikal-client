@@ -174,7 +174,7 @@ const Navbar = () => {
         {/* Right: Call + Button (Desktop) */}
         <div className="hidden lg:flex items-center gap-5">
           <a href="tel:*5005" className="group relative">
-            <div className="flex items-center gap-3 rounded-full   bg-gradient-to-r from-[#ffe9ec] to-[#eef4ff] px-5 py-2 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
+            <div className="flex items-center gap-3 rounded-full   bg-gradient-to-r from-[#ece9ff] to-[#eef4ff] px-6 py-2 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
               <div className="relative h-8 w-8 flex items-center justify-center rounded-full bg-primary/10 text-primary">
                 <motion.div
                   aria-hidden
