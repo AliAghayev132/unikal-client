@@ -16,11 +16,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${inter.variable} antialiased`}
       >
+        <div className="min-h-[90vh]">
         <Navbar/>
-        <div className="min-h-[88vh]">
-
         {children}
         </div>
+
         <Footer/>
       </body>
     </html>

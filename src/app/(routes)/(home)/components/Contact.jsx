@@ -89,7 +89,7 @@ export const Contact = () => {
               <div className="text-[11px] text-slate-500">Rəylər</div>
             </div>
           </div>
-          <div className="sm:mt-8 flex sm:flex-row flex-col justify-center items-center gap-4">
+          <div className="mt-8 flex sm:flex-row flex-col justify-center items-center gap-4">
               <Button text="Qəbula Yazılın" isLink href="/contact" variant="default" className="px-6 py-3 text-base" />
               <Button text="Mütəxəssislərimiz" isLink href="/doctors" variant="outline" className="px-6 py-3 text-base" />
               {/* <a

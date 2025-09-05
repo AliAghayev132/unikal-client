@@ -88,6 +88,12 @@ const Navbar = () => {
                       >
                         Həkimlər
                       </Link>
+                      <Link
+                        href="/corporate"
+                        className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#0a3af8] transition"
+                      >
+                        Korporativ
+                      </Link>
                     </div>
                   </motion.div>
                 )}
@@ -146,6 +152,24 @@ const Navbar = () => {
                             </div>
                           </Link>
                         ))}
+                      </div>
+                      {/* Emergency full-width link */}
+                      <div className="mt-3">
+                        <Link
+                          href="/services/emergency"
+                          className="flex items-center justify-between rounded-xl p-3.5 bg-gradient-to-r from-rose-50 to-sky-50 border border-rose-100 text-rose-700 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className="h-8 w-8 flex items-center justify-center rounded-full bg-rose-100 text-rose-600">
+                              <PhoneCall size={18} />
+                            </span>
+                            <div>
+                              <div className="text-sm font-semibold">Təcili Tibbi Yardım</div>
+                              <div className="text-xs text-rose-600/80">7/24 Çağrı: <span className="font-medium text-rose-700">*5005</span></div>
+                            </div>
+                          </div>
+                          <span className="text-xs rounded-full bg-white text-rose-700 px-2.5 py-1 border border-rose-200">Çağır</span>
+                        </Link>
                       </div>
                     </div>
                   </motion.div>
@@ -293,6 +317,7 @@ const Navbar = () => {
                   <Link href="/about" onClick={() => setIsOpen(false)} className="py-2 text-slate-700 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1">Haqqımızda</Link>
                   <Link href="/careers" onClick={() => setIsOpen(false)} className="py-2 text-slate-700 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1">Karyera</Link>
                   <Link href="/doctors" onClick={() => setIsOpen(false)} className="py-2 text-slate-700 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1">Həkimlər</Link>
+                  <Link href="/corporate" onClick={() => setIsOpen(false)} className="py-2 text-slate-700 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1">Korporativ</Link>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -337,6 +362,22 @@ const Navbar = () => {
                       {s.title}
                     </Link>
                   ))}
+                  {/* Emergency full-width link (mobile) */}
+                  <div className="mt-2 pr-1">
+                    <Link
+                      href="/services/emergency"
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center justify-between rounded-lg p-3 bg-rose-50 text-rose-700 hover:bg-rose-100 transition"
+                    >
+                      <span className="flex items-center gap-2">
+                        <span className="h-7 w-7 flex items-center justify-center rounded-full bg-rose-100 text-rose-600">
+                          <PhoneCall size={16} />
+                        </span>
+                        <span className="text-sm font-medium">Təcili Tibbi Yardım</span>
+                      </span>
+                      <span className="text-xs rounded-full bg-white text-rose-700 px-2 py-0.5 border border-rose-200">7/24</span>
+                    </Link>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
