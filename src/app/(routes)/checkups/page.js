@@ -7,6 +7,8 @@ import FAQ from "../(home)/components/FAQ";
 import { CheckCircle, Stethoscope, HeartPulse, Shield, Clock, FlaskConical, Activity } from 'lucide-react'
 import Processes from './(components)/Processes'
 import ContactNow from '../about/components/ContactNow'
+import ExtraServices from './(components)/ExtraServices'
+import CheckUpPreparation from './(components)/CheckUpPreparation'
 
 const packages = [
   {
@@ -291,54 +293,10 @@ export default function CheckupsPage() {
       </section>
 
       {/* Preparation instructions */}
-      <section className="wrapper pb-12 md:pb-16">
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-4">Check-up-a hazırlıq</h2>
-          <p className="text-slate-600 mb-5">Daha doğru nəticələr üçün ziyarətdən əvvəl aşağıdakı tövsiyələrə əməl etməyiniz xahiş olunur:</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <ul className="space-y-2 list-disc pl-5 text-sm text-slate-700">
-              <li>Analizlərdən 8–10 saat əvvəl ac qalın (su içmək olar).</li>
-              <li>Qəhvə, enerji içkiləri və alkoqoldan 24 saat əvvəl uzaq durun.</li>
-              <li>Daimi dərmanlar barədə həkimlə öncədən məsləhətləşin.</li>
-              <li>Rahat geyim və asan çıxarılan aksessuarlar seçin.</li>
-            </ul>
-            <ul className="space-y-2 list-disc pl-5 text-sm text-slate-700">
-              <li>USM üçün sidik kisəsini boşaltmayın (həkim göstərişi ilə).</li>
-              <li>Rentgen öncəsi metal aksessuarları çıxarın.</li>
-              <li>Yuxu rejiminizi mümkün qədər normal saxlayın.</li>
-              <li>Gəliş vaxtına 10–15 dəqiqə əvvəl klinikada olun.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+    <CheckUpPreparation/>
 
       {/* Add-on services */}
-      <section className="wrapper pb-12 md:pb-16">
-        <h2 className="text-2xl md:text-3xl font-semibold mb-6">Əlavə xidmətlər</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="flex items-center gap-3 mb-3">
-              <span className="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-100 text-slate-700"><FlaskConical size={18} /></span>
-              <div className="font-medium">Vitamin D və tiroid paneli</div>
-            </div>
-            <p className="text-sm text-slate-600">TSH, T3/T4 və Vitamin D səviyyələrinin qiymətləndirilməsi.</p>
-          </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="flex items-center gap-3 mb-3">
-              <span className="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-100 text-slate-700"><Activity size={18} /></span>
-              <div className="font-medium">EKQ Holter / Qlikoz Holter</div>
-            </div>
-            <p className="text-sm text-slate-600">Ritm və şəkər dəyişikliklərinin 24–48 saat monitorinqi.</p>
-          </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="flex items-center gap-3 mb-3">
-              <span className="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-100 text-slate-700"><HeartPulse size={18} /></span>
-              <div className="font-medium">ECHO / Qarın boşluğu USM</div>
-            </div>
-            <p className="text-sm text-slate-600">Həkim göstərişi ilə ürək USM və qarın boşluğu USM.</p>
-          </div>
-        </div>
-      </section>
+    <ExtraServices/>
 
       {/* Process steps */}
      <Processes />
