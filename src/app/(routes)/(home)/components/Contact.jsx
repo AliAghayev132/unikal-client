@@ -171,7 +171,7 @@ export const Contact = () => {
           {/* Map */}
           <div className="overflow-hidden rounded-3xl shadow-md border border-slate-200/60">
   <iframe
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3038.847962250021!2d49.867092!3d40.409264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d8c8f7f4f61%3A0xa2c7e4d88a9c8f81!2sBaku!5e0!3m2!1sen!2saz!4v1691234567890"
+    src="https://www.google.com/maps/embed?pb=!1m19!1m8!1m3!1d7236.747736945204!2d49.679103!3d40.5760988!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x403096d2f7c1347b%3A0xec373a5ae412dc7!2sUnikal%20Klinika%20HMGH%2BCJQ%20Sumqay%C4%B1t%205001!3m2!1d40.5760988!2d49.679103!5e1!3m2!1str!2saz!4v1757096524805!5m2!1str!2saz"
     width="100%"
     height="300"
     style={{ border: 0 }}
