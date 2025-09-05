@@ -185,7 +185,7 @@ const Navbar = () => {
             {/* Xəbərlər */}
             <Link
               href="/blogs"
-              className="text-gray-700 hover:text-[#0a3af8] font-medium transition"
+              className="lg:block hidden text-gray-700 hover:text-[#0a3af8] font-medium transition"
             >
               Xəbərlər
             </Link>
