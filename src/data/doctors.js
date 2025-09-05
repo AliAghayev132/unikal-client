@@ -8,7 +8,6 @@ export const doctors = [
     serviceSlug: "kardiologiya",
     title: "Kardioloq",
     image: doctorImage,
-    experienceYears: 12,
     shift: "morning",
     socialLinks: {
       linkedIn: '',
@@ -32,7 +31,6 @@ export const doctors = [
     serviceSlug: "nevrologiya",
     title: "Nevroloq",
     image: doctorImage,
-    experienceYears: 7,
     shift: "afternoon",
     socialLinks: {
       tiktok: '',
@@ -55,7 +53,6 @@ export const doctors = [
     serviceSlug: "ortopediya",
     title: "Ortoped",
     image: doctorImage,
-    experienceYears: 9,
     shift: "evening",
     socialLinks: {
       tiktok: '',
@@ -78,7 +75,6 @@ export const doctors = [
     serviceSlug: "usaq-hekimliyi",
     title: "Pediatr",
     image: doctorImage,
-    experienceYears: 5,
     shift: "morning",
     socialLinks: {
       tiktok: '',
@@ -101,7 +97,6 @@ export const doctors = [
     serviceSlug: "umumi-muayine",
     title: "Terapevt",
     image: doctorImage,
-    experienceYears: 15,
     shift: "afternoon",
     socialLinks: {
       tiktok: '',
@@ -123,7 +118,6 @@ export const doctors = [
     serviceSlug: "gastroenterologiya",
     title: "Gastroenteroloq",
     image: doctorImage,
-    experienceYears: 6,
     shift: "evening",
     socialLinks: {
       tiktok: '',

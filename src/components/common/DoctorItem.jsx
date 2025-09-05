@@ -73,9 +73,6 @@ const DoctorItem = ({ doctor, isHome = false }) => {
           <p className="mt-1 text-slate-600 text-sm leading-relaxed">
             {doctor.title}
           </p>
-          <span className="inline-flex mt-2 items-center rounded-full bg-blue-50 text-blue-700 px-2.5 py-1 text-xs font-medium">
-            {doctor.experienceYears} il təcrübə
-          </span>
           {doctor.shift && !isHome && (
             <span className="inline-flex ml-2 items-center rounded-full bg-emerald-50 text-emerald-700 px-2.5 py-1 text-xs font-medium">
               {doctor.shift === "morning" && "Səhər"}

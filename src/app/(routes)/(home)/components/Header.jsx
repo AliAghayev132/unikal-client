@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 const Header = () => {
   return (
-    <header className="wrapper sm:py-12 py-10">
+    <header className="wrapper sm:py-6 py-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left Side (Text) */}
         <motion.div
@@ -93,7 +93,7 @@ const Header = () => {
 
         {/* Right Side (Image with Shape) */}
         <motion.div
-          className="relative"
+          className="relative sm:w-[90%] flex justify-center mx-auto"
           initial={{ opacity: 0, x: 50, scale: 0.95 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ duration: 1, ease: [0.25, 1, 0.5, 1], delay: 0.5 }}
@@ -104,7 +104,7 @@ const Header = () => {
             width={1000}
             height={1000}
             priority
-            className="rounded-[2rem] object-cover"
+            className="rounded-[2rem] object-cover w-full h-full "
           />
         </motion.div>
       </div>

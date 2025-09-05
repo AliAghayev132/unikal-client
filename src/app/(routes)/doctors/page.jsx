@@ -5,25 +5,29 @@ import { services } from "@/data/services";
 import Doctor from "./components/Doctor";
 import PageHeaders from "@/components/common/PageHeaders";
 import DoctorItem from "@/components/common/DoctorItem";
+import MultiSelectPopover from "@/components/common/MultiSelectPopover";
 
 
 export default function DoctorsPage() {
-  const [serviceFilter, setServiceFilter] = useState("");
+  // Multi-select states
+  const [serviceFilter, setServiceFilter] = useState([]);
   const [nameQuery, setNameQuery] = useState("");
-  const [shiftFilter, setShiftFilter] = useState("");
-  const [minExperience, setMinExperience] = useState(0);
+  const [shiftFilter, setShiftFilter] = useState([]);
 
   const filtered = useMemo(() => {
     return doctors.filter((d) => {
-      const matchesService = serviceFilter ? d.serviceSlug === serviceFilter : true;
+      const matchesService = Array.isArray(serviceFilter) && serviceFilter.length > 0
+        ? serviceFilter.includes(d.serviceSlug)
+        : true;
       const matchesName = nameQuery
         ? d.name.toLowerCase().includes(nameQuery.trim().toLowerCase())
         : true;
-      const matchesShift = shiftFilter ? d.shift === shiftFilter : true;
-      const matchesExperience = Number(minExperience) > 0 ? d.experienceYears >= Number(minExperience) : true;
-      return matchesService && matchesName && matchesShift && matchesExperience;
+      const matchesShift = Array.isArray(shiftFilter) && shiftFilter.length > 0
+        ? shiftFilter.includes(d.shift)
+        : true;
+      return matchesService && matchesName && matchesShift;
     });
-  }, [serviceFilter, nameQuery, shiftFilter, minExperience]);
+  }, [serviceFilter, nameQuery, shiftFilter]);
 
   return (
     <main className="w-full wrapper">
@@ -32,22 +36,15 @@ export default function DoctorsPage() {
 
       {/* Filters */}
       <section className="pb-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-          <div className="flex-1">
-            <label className="block text-sm font-medium text-neutral-700 mb-1">Xidmət</label>
-            <select
-              value={serviceFilter}
-              onChange={(e) => setServiceFilter(e.target.value)}
-              className="w-full border border-neutral-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#0a3af8]"
-            >
-              <option value="">Hamısı</option>
-              {services.map((s) => (
-                <option key={s.id} value={s.slug}>
-                  {s.title}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+          {/* Services multi-select */}
+          <MultiSelectPopover
+            label="Xidmət"
+            placeholder="Hamısı"
+            options={services.map((s) => ({ value: s.slug, label: s.title }))}
+            selected={serviceFilter}
+            onChange={setServiceFilter}
+          />
           <div className="flex-1">
             <label className="block text-sm font-medium text-neutral-700 mb-1">Ad ilə axtar</label>
             <input
@@ -58,31 +55,14 @@ export default function DoctorsPage() {
               className="w-full border border-neutral-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#0a3af8]"
             />
           </div>
-          <div className="flex-1">
-            <label className="block text-sm font-medium text-neutral-700 mb-1">İş saatı</label>
-            <select
-              value={shiftFilter}
-              onChange={(e) => setShiftFilter(e.target.value)}
-              className="w-full border border-neutral-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#0a3af8]"
-            >
-              {availableShifts.map((s) => (
-                <option key={s.value} value={s.value}>
-                  {s.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="flex-1">
-            <label className="block text-sm font-medium text-neutral-700 mb-1">Minimum təcrübə (il)</label>
-            <input
-              type="number"
-              min={0}
-              value={minExperience}
-              onChange={(e) => setMinExperience(e.target.value)}
-              placeholder="Məs: 5"
-              className="w-full border border-neutral-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#0a3af8]"
-            />
-          </div>
+          {/* Shift multi-select */}
+          <MultiSelectPopover
+            label="İş saatı"
+            placeholder="Hamısı"
+            options={availableShifts.filter((s) => s.value !== "").map((s) => ({ value: s.value, label: s.label }))}
+            selected={shiftFilter}
+            onChange={setShiftFilter}
+          />
         </div>
       </section>
 
@@ -104,3 +84,4 @@ export default function DoctorsPage() {
     </main>
   );
 }
+

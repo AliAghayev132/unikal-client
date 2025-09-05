@@ -1,10 +1,12 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '@/components/ui/Button'
 import { ContainerAnimation } from '@/components/ui/Animations'
 import { doctors } from '@/data/doctors'
+import SingleSelectPopover from '@/components/common/SingleSelectPopover'
 
 const ContactForm = () => {
+  const [doctorId, setDoctorId] = useState(null)
   return (
     <section className="wrapper">
       <ContainerAnimation>
@@ -13,7 +15,7 @@ const ContactForm = () => {
         {/* Name */}
         <div className="col-span-1">
           <label className="block text-sm text-slate-600 mb-2">Ad</label>
-          <input type="text" placeholder="El Şabanov" className="w-full rounded-xl border border-slate-200 focus:border-primary/60 focus:ring-primary/20 ring-2 ring-transparent px-4 py-3 outline-none transition placeholder:text-slate-400" />
+          <input type="text" placeholder="Ad Soyad " className="w-full rounded-xl border border-slate-200 focus:border-primary/60 focus:ring-primary/20 ring-2 ring-transparent px-4 py-3 outline-none transition placeholder:text-slate-400" />
         </div>
         {/* Email */}
         <div className="col-span-1">
@@ -27,18 +29,18 @@ const ContactForm = () => {
         </div>
         {/* Doctor select */}
         <div className="col-span-1">
-          <label className="block text-sm text-slate-600 mb-2">Həkim Seçimi</label>
-          <select className="w-full rounded-xl border border-slate-200 focus:border-primary/60 focus:ring-primary/20 ring-2 ring-transparent px-4 py-3 outline-none transition">
-            <option value="">Həkim seçin</option>
-            {doctors.map((d) => (
-              <option key={d.id} value={d.id}>{`${d.name} — ${d.title}`}</option>
-            ))}
-          </select>
+          <SingleSelectPopover
+            label="Həkim Seçimi"
+            placeholder="Həkim seçin"
+            options={doctors.map((d) => ({ value: String(d.id), label: `${d.name} — ${d.title}` }))}
+            value={doctorId}
+            onChange={setDoctorId}
+          />
         </div>
         {/* Schedule */}
         <div className="col-span-1">
           <label className="block text-sm text-slate-600 mb-2">Görüş Qrafiki</label>
-          <input type="text" placeholder="11:00 am - 13:00 pm" className="w-full rounded-xl border border-slate-200 focus:border-primary/60 focus:ring-primary/20 ring-2 ring-transparent px-4 py-3 outline-none transition placeholder:text-slate-400" />
+          <input type="text" placeholder="Məs: 11:00 - 13:00 " className="w-full rounded-xl border border-slate-200 focus:border-primary/60 focus:ring-primary/20 ring-2 ring-transparent px-4 py-3 outline-none transition placeholder:text-slate-400" />
         </div>
         {/* Message */}
         <div className="col-span-1 md:col-span-2">

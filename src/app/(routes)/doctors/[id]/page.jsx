@@ -36,11 +36,6 @@ export default function DoctorProfilePage({ params }) {
             {doctor.title && (
               <p className="text-slate-600 mt-1">{doctor.title}</p>
             )}
-            {typeof doctor.experienceYears !== "undefined" && (
-              <span className="inline-flex mt-2 items-center rounded-full bg-blue-50 text-blue-700 px-2.5 py-1 text-xs font-medium">
-                {doctor.experienceYears} il təcrübə
-              </span>
-            )}
           </div>
         </div>
 

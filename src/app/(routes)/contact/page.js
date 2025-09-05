@@ -17,8 +17,8 @@ const ContactPage = () => {
       <header className="wrapper">
       <PageHeaders
         title="Qəbul"
-        subtitle1="Qəbul"
-        subtitle2="üçün yazılın"
+        subtitle1="Qəbul üçün"
+        subtitle2="yazılın"
         description="Həkim qəbuluna yazılaraq sağlamlığınızı vaxtında nəzarətdə saxlayın. Peşəkar komandamızla dəqiq diaqnoz və effektiv müalicə üçün ilk addımı indi atın."
         />
         </header>

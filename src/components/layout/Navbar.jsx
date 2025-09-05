@@ -31,7 +31,7 @@ const Navbar = () => {
         {/* Left: Logo */}
         <div className="flex items-center gap-10">
           <Link href="/">
-            <div className="lg:w-[140px] w-[120px]">
+            <div className="lg:w-[140px] w-[120px] block">
               <Image priority src={logo} alt="Logo" width={140} height={140} />
             </div>
           </Link>
@@ -69,7 +69,7 @@ const Navbar = () => {
                     style={{willChange: "transform"}}
                     className="absolute left-1/2 -translate-x-1/2 top-full mt-0 z-40"
                   >
-                    <div className="w-56 rounded-xl border border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-xl p-2">
+                    <div className="w-56 rounded-xl border border-slate-200 bg-white shadow-xl p-2">
                       <Link
                         href="/about"
                         className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#0a3af8] transition"
@@ -117,7 +117,7 @@ const Navbar = () => {
                     className="absolute top-full left-1/2 -translate-x-1/2 z-40"
                     style={{willChange: "transform"}}
                   >
-                    <div className="min-w-[560px] rounded-xl border border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-2xl p-4">
+                    <div className="min-w-[560px] rounded-xl border border-slate-200 bg-white shadow-2xl p-4">
                       <div className="grid grid-cols-2 gap-2">
                         {services.map((s) => (
                           <Link
@@ -210,7 +210,7 @@ const Navbar = () => {
           >
         {/* Header of mobile menu */}
         <div className="flex items-center justify-between px-6 py-6 ">
-          <Link href="/" className="sm:w-[140px] w-[120px]">
+          <Link href="/" className="sm:w-[140px] w-[120px] block">
             <Image
               priority
               src={logo}
