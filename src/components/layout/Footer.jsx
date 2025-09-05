@@ -102,7 +102,8 @@ const Footer = () => {
                 { name: "Haqqımızda", href: "/about",id:1 },
                 // { name: "Şöbələr", href: "/services" },
                 { name: "Həkimlərimiz", href: "/doctors",id:2 },
-                { name: "Karyera", href: "/careers",id:3 }
+                { name: "Check-up Paketləri", href: "/checkups",id:3 },
+                { name: "Karyera", href: "/careers",id:4 }
               ].map((link) => (
                 <motion.li 
                   key={link.id}
@@ -128,7 +129,7 @@ const Footer = () => {
 
                 { name: "Xəbərlər", href: "/blogs",id:2 },
                 // { name: "Tez-tez verilən suallar", href: "/faq" },
-                { name: "Qəbula Yazıl", href: "/contact",id:3 }
+                { name: "Qəbula Yazıl", href: "/contact",id:3 },
               ].map((link) => (
                 <motion.li 
                   key={link.id}
@@ -168,6 +169,7 @@ const Footer = () => {
                 </svg>
                 <span className="text-white">unicalclinica@gmail.com</span>
               </li>
+              
             </ul>
           </motion.div>
         </motion.div>
