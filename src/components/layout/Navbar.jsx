@@ -176,7 +176,12 @@ const Navbar = () => {
                 )}
               </AnimatePresence>
             </div>
-
+            <Link
+              href="/checkups"
+              className="text-gray-700 hover:text-[#0a3af8] font-medium transition"
+            >
+              Check Up
+            </Link>
             {/* Xəbərlər */}
             <Link
               href="/blogs"
@@ -382,7 +387,15 @@ const Navbar = () => {
               )}
             </AnimatePresence>
           </div>
-
+          <div className="pt-2">
+            <Link
+              href="/checkups"
+              onClick={() => setIsOpen(false)}
+              className="text-slate-700 text-lg font-medium py-2 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1 transition"
+            >
+              Check Up
+            </Link>
+          </div>
           {/* Xəbərlər */}
           <div className="pt-2">
             <Link
