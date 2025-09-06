@@ -77,7 +77,7 @@ export const Contact = () => {
           {/* Mini stats */}
           <div className="mt-6 grid grid-cols-3 gap-3">
             <div className="rounded-2xl border border-slate-200/70 bg-white/60 p-3 text-center">
-              <div className="text-xl font-semibold text-slate-900">15+</div>
+              <div className="text-xl font-semibold text-slate-900">45+</div>
               <div className="text-[11px] text-slate-500">Həkim</div>
             </div>
             <div className="rounded-2xl border border-slate-200/70 bg-white/60 p-3 text-center">

@@ -222,7 +222,7 @@ const Navbar = () => {
                 />
               </div>
               <div className="leading-tight">
-                <div className="text-[11px] text-slate-500 group-hover:text-slate-600">Təcili Xətt</div>
+                <div className="text-[11px] text-slate-500 group-hover:text-slate-600">Çağrı Mərkəzi</div>
                 <div className="text-xl font-semibold text-slate-900 tracking-tight"><span className="text-primary">*</span>5005</div>
               </div>
               {/* <span aria-hidden className="absolute -right-1 -top-1 h-2 w-2 rounded-full bg-red-500 animate-pulse" /> */}
@@ -441,7 +441,7 @@ const Navbar = () => {
                 />
               </div>
               <div className="leading-tight">
-                <div className="text-[11px] text-slate-500 group-hover:text-slate-600">Təcili Xətt</div>
+                <div className="text-[11px] text-slate-500 group-hover:text-slate-600">Çağrı Mərkəzi</div>
                 <div className="text-xl font-semibold text-slate-900 tracking-tight"><span className="text-primary">*</span>5005</div>
               </div>
             </div>
