@@ -22,8 +22,8 @@ function Home() {
      <Services />
      <Partners />
      <Doctors />
-     <Blogs />
      <Contact />
+     <Blogs />
      <FAQ />
     </div>
   );
