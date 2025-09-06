@@ -51,7 +51,7 @@ const InfoCards = () => {
                   Ünvan
                 </h3>
               </div>
-              <p className="text-sm text-slate-600">AZ5009, Sumqayıt şəhəri, <br /> Niyazi küçəsi, 121</p>
+              <p className="text-sm text-slate-600">AZ5009, Sumqayıt şəhəri, <br /> İsmət Qayıbov küçəsi, giriş 2</p>
             </div>
           </ItemAnimation>
 

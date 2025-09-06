@@ -26,7 +26,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="max-w-[1600px] w-full mx-auto z-50 px-6 py-6 relative">
+    <nav className="max-w-[1600px] w-full mx-auto z-50 sm:px-6 px-4 py-6 relative">
       <div className="flex w-full items-center justify-between">
         {/* Left: Logo */}
         <div className="flex items-center gap-10">
@@ -237,12 +237,42 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
+        <div className="flex items-center gap-3 lg:hidden">
+
+        <a href="tel:*5005" className="group relative ">
+            <div className="flex items-center gap-2 rounded-full   bg-gradient-to-r from-[#ece9ff] to-[#eef4ff] sm:px-4 px-3 sm:py-3 py-2 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
+              <div className="relative h-6 w-6 flex items-center justify-center rounded-full bg-primary/10 text-primary">
+                <motion.div
+                  aria-hidden
+                  animate={{ rotate: [0, -10, 10, -10, 0] }}
+                  transition={{ duration: 1.4, ease: [0.22,1,0.36,1], repeat: Infinity, repeatDelay: 1.2 }}
+                  className="flex items-center justify-center"
+                >
+                  <PhoneCall size={14} />
+                </motion.div>
+                <motion.span
+                  aria-hidden
+                  className="absolute inset-0 rounded-full border-2 border-primary/20"
+                  initial={{ scale: 0.8, opacity: 0.5 }}
+                  animate={{ scale: 1.3, opacity: 0 }}
+                  transition={{ duration: 1.4, repeat: Infinity, repeatDelay: 1.2, ease: "easeOut" }}
+                />
+              </div>
+              <div className="leading-tight">
+                <div className="text-[10px] text-slate-500 group-hover:text-slate-600">Çağrı Mərkəzi</div>
+                <div className="text-[14px] font-semibold text-slate-900 tracking-tight"><span className="text-primary">*</span>5005</div>
+              </div>
+              {/* <span aria-hidden className="absolute -right-1 -top-1 h-2 w-2 rounded-full bg-red-500 animate-pulse" /> */}
+            </div>
+          </a>
         <button
-          className="lg:hidden text-gray-800 mr-1"
+          className=" text-gray-800 mr-1"
           onClick={() => setIsOpen(!isOpen)}
         >
            <Menu size={28} />
         </button>
+        </div>
+        
       </div>
 
       {/* Mobile Menu */}
