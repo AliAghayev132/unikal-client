@@ -94,6 +94,12 @@ const Navbar = () => {
                       >
                         Korporativ
                       </Link>
+                      <Link
+                        href="/about/social-projects"
+                        className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#0a3af8] transition"
+                      >
+                        Sosial Layihələr
+                      </Link>
                     </div>
                   </motion.div>
                 )}
@@ -353,6 +359,7 @@ const Navbar = () => {
                   <Link href="/careers" onClick={() => setIsOpen(false)} className="py-2 text-slate-700 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1">Karyera</Link>
                   <Link href="/doctors" onClick={() => setIsOpen(false)} className="py-2 text-slate-700 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1">Həkimlər</Link>
                   <Link href="/corporate" onClick={() => setIsOpen(false)} className="py-2 text-slate-700 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1">Korporativ</Link>
+                  <Link href="/about/social-projects" onClick={() => setIsOpen(false)} className="py-2 text-slate-700 hover:text-[#0a3af8] hover:bg-slate-50 rounded-md px-1">Sosial Layihələr</Link>
                 </motion.div>
               )}
             </AnimatePresence>
