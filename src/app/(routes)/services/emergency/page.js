@@ -23,7 +23,7 @@ function Emergency() {
               tam təchizatlı ambulans vasitəsi ilə çağırış yerinə dərhal çatır, ilkin tibbi yardımı göstərir və
               təhlükəsiz nəqliyyat təmin edir.
             </p>
-            <div className="mt-6 flex flex-wrap gap-4">
+            <div className="mt-6 flex items-center sm:justify-start justify-center gap-4">
               <Button isLink href="/contact" variant="default" text="Qəbula yazıl" />
               <a href="tel:*5005" className="group relative">
             <div className="flex items-center gap-3 rounded-full   bg-gradient-to-r from-[#ece9ff] to-[#eef4ff] px-6 py-2 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
