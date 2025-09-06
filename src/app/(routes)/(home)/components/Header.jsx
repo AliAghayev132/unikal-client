@@ -41,7 +41,7 @@ const Header = () => {
             {[
               {
                 icon: <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />,
-                text: "Niyazi küçəsi, 121, Sumqayıt şəhəri, AZ5009",
+                text: "Sumqayıt şəhəri, İsmət Qayıbov küçəsi, giriş 2, AZ5009",
               },
               {
                 icon: <Clock className="w-5 h-5 text-primary shrink-0 mt-0.5" />,
