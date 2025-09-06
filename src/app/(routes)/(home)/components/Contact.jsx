@@ -163,7 +163,7 @@ export const Contact = () => {
                 <Mail size={18} className="text-indigo-500" /> unicalclinica@gmail.com
               </li>
               <li className="flex items-center gap-3">
-                <MapPin size={18} className="text-indigo-500" />Sumqayıt şəhəri, İsmət Qayıbov küçəsi, giriş 2, AZ5009
+                <MapPin size={18} className="text-indigo-500" />İsmət Qayıbov küçəsi, giriş 2, Sumqayıt şəhəri AZ5009
               </li>
             </ul>
           </div>

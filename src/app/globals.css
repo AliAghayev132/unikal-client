@@ -47,6 +47,11 @@ body {
   font-family: var(--font-inter);
 }
 
+.project-gallery-pagination{
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 1024px) {
   .wrapper {
     padding-left: 20px;

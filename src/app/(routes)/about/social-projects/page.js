@@ -1,17 +1,14 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
 import { socialProjects } from "@/data/socialProjects";
-import Image from "next/image";
 import PageHeaders from "@/components/common/PageHeaders";
 import SocialProject from "./(components)/SocialProject";
 
 export default function SocialProjectsPage() {
   return (
     <main>
-      <div className="wrapper">
+      <div className="wrapper py-10 md:py-14 lg:py-16">
         {/* Heading */}
         <PageHeaders
           title="Sosial Layihələr"

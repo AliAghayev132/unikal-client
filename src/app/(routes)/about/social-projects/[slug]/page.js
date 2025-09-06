@@ -1,7 +1,7 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import { socialProjects, getProjectBySlug } from "@/data/socialProjects";
+import ProjectGallery from "../(components)/ProjectGallery";
 
 export async function generateStaticParams() {
   return socialProjects.map((p) => ({ slug: p.slug }));
@@ -35,16 +35,8 @@ export default function SocialProjectDetailPage({ params }) {
           </h1>
         </div>
 
-        <div className="relative w-full aspect-[16/9] overflow-hidden rounded-2xl mb-8">
-          <Image
-            src={typeof project.image === 'string' ? project.image : project.image}
-            alt={project.name}
-            width={500}
-            height={500}
-            priority
-            className="object-cover w-full h-full"
-            sizes="(max-width: 768px) 100vw, 768px"
-          />
+        <div className="mb-8">
+          <ProjectGallery images={project.images} />
         </div>
 
         <article className="prose prose-slate max-w-none text-slate-700 leading-relaxed">

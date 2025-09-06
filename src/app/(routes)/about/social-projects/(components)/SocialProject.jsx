@@ -20,13 +20,11 @@ const SocialProject = ({p, i}) => {
             >
               <div className="relative overflow-hidden rounded-xl">
                 <Image
-                  src={typeof p.image === "string" ? p.image : p.image?.src}
+                  src={typeof p.images?.[0] === "string" ? p.images[0] : p.images?.[0]}
                   alt={p.name}
                   width={500}
                   height={500}
                   className="w-full h-56 md:h-64 object-cover hover:scale-110 transition duration-500"
-                  //   whileHover={{ scale: 1.1 }}
-                  //   transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
                   style={{ willChange: "transform" }}
                 />
               </div>
