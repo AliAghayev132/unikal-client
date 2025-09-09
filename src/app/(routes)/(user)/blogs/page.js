@@ -1,11 +1,9 @@
-import Image from "next/image";
 import bestServiceImg from "@/assets/sections/bestservice.jpg";
 import ourMissionImg from "@/assets/sections/ourmission.jpg";
 import heroImg from "@/assets/unikal_esas.jpg";
 import Grid from "./components/Grid";
-import ContactNow from "../about/components/ContactNow";
-import { TextAnimation } from "@/components/ui/Animations";
 import PageHeaders from "@/components/common/PageHeaders";
+import ContactNow from "../about/components/ContactNow";
 
 const posts = [
   {
