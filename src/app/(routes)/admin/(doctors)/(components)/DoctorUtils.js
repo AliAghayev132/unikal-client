@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 // Helper to show a confirmation dialog
 
-const confirmAction = async (title = 'Əminsiniz?', text = 'Bu addım geri qaytarıla bilməz!') => {
+export const confirmAction = async (title = 'Əminsiniz?', text = 'Bu addım geri qaytarıla bilməz!') => {
   return Swal.fire({
     title,
     text,

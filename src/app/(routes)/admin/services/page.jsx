@@ -3,7 +3,7 @@ import AdminPageHeader from "../(components)/AdminPageHeader";
 
 function AdminServicesPage() {
   return (
-    <div className="wrapper">
+    <div className="admin-wrapper">
       <AdminPageHeader title="Xidmətlər" />
     </div>
 )

@@ -54,7 +54,7 @@ export default function AdminLayout({ children }) {
                         background: '#3966b0',
                         color: '#fff',
                         fontWeight: '500',
-                        fontSize: '14px',
+                        fontSize: '16px',
                         padding: '12px 16px',
                         borderRadius: '8px',
                         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
@@ -62,7 +62,7 @@ export default function AdminLayout({ children }) {
                 }}
             />
       <Sidebar />
-      <main className="flex-1 p-4 md:p-8">{children}</main>
+      <main className="flex-1">{children}</main>
     </div>
   );
 }

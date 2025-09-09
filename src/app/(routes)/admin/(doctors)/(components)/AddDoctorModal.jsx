@@ -3,9 +3,10 @@
 import { useState } from "react";
 import AdminModal from "@/app/(routes)/admin/(components)/AdminModal";
 import { Plus, Trash2 } from "lucide-react";
-import { Input, NumberInput, Label } from "@/components/common/FormComponents";
+import { Input, NumberInput, Label, SlugInput, ImageUpload } from "@/components/common/FormComponents";
 import { useCreateDoctorMutation } from "@/store/admin/services/DoctorsApi";
 import toast from "react-hot-toast";
+import { confirmAction } from "./DoctorUtils";
 
 const initialForm = {
   title: "",
@@ -13,28 +14,29 @@ const initialForm = {
   lastName: "",
   specialty: "",
   slug: "",
-  subSpecialties: [""],
-  experienceYears: 0,
-  startedAtYear: 1900,
+  photo: "",
+  // subSpecialties: [""],
+  // experienceYears: 0,
+  // startedAtYear: 0,
   summary: "",
   bio: "",
   education: [
-    {
-      institution: "",
-      program: "",
-      startYear: 1,
-      endYear: 1,
-    },
+    // {
+    //   institution: "",
+    //   program: "",
+    //   startYear: 0,
+    //   endYear: 0,
+    // },
   ],
   certificates: [
-    {
-      title: "",
-      issuer: "",
-      year: 1,
-    },
+    // {
+    //   title: "",
+    //   issuer: "",
+    //   year: 1,
+    // },
   ],
-  isActive: true,
-  sortOrder: 0,
+  // isActive: true,
+  // sortOrder: 0,
 };
 
 export default function AddDoctorModal({ open, onClose, onSubmit }) {
@@ -42,6 +44,7 @@ export default function AddDoctorModal({ open, onClose, onSubmit }) {
     useCreateDoctorMutation();
 
   const [form, setForm] = useState(initialForm);
+  const [isSlugValid, setIsSlugValid] = useState(false);
 
   const updateField = (key, value) => setForm((f) => ({ ...f, [key]: value }));
 
@@ -64,22 +67,10 @@ export default function AddDoctorModal({ open, onClose, onSubmit }) {
       return typeof last === "string" && last.trim().length > 0;
     }
     if (key === "education") {
-      // require institution & program before adding a new one
-      return (
-        last &&
-        typeof last === "object" &&
-        String(last.institution || "").trim().length > 0 &&
-        String(last.program || "").trim().length > 0
-      );
+      return typeof last === "string" && last.trim().length > 0;
     }
     if (key === "certificates") {
-      // require title & issuer before adding a new one
-      return (
-        last &&
-        typeof last === "object" &&
-        String(last.title || "").trim().length > 0 &&
-        String(last.issuer || "").trim().length > 0
-      );
+      return typeof last === "string" && last.trim().length > 0;
     }
     return true;
   };
@@ -96,13 +87,55 @@ export default function AddDoctorModal({ open, onClose, onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      await createDoctor(form).unwrap();
-      toast.success("Həkim əlavə edildi");
-      resetAndClose();
-    } catch (error) {
-      toast.error("Həkim əlavə edilə bilmədi", error?.data?.message || error?.error);
+    const result = await confirmAction('Həkim əlavə edilsin?', 'Bu həkim əlavə edilsin!');
+    const formData = new FormData();
+
+    // Required
+    formData.append("title", form.title);
+    formData.append("firstName", form.firstName);
+    formData.append("lastName", form.lastName);
+    formData.append("specialty", form.specialty);
+    formData.append("slug", form.slug);
+
+    // Optional
+    if(form.summary.trim().length > 0){
+      formData.append("summary", form.summary);
     }
+
+    if(form.bio.trim().length > 0){
+      formData.append("bio", form.bio);
+    }
+
+    if(form.education.length > 0){
+      formData.append("education", JSON.stringify(form.education));
+    }
+
+    if(form.certificates.length > 0){
+      formData.append("certificates", JSON.stringify(form.certificates));
+    }
+
+    // Photo (compressed payload from ImageUpload)
+    if (form.photo && typeof form.photo === 'object' && form.photo.data) {
+      try {
+        formData.append("photo", JSON.stringify(form.photo));
+      } catch (_) {}
+    }
+
+   for (const [key, value] of Object.entries(formData)) {
+    console.log("salamm",key, value);
+  } 
+
+
+    if (result.isConfirmed) {
+      try {
+        await createDoctor(formData).unwrap();
+        toast.success("Həkim əlavə edildi");
+        resetAndClose();
+      } catch (error) {
+      toast.error("Həkim əlavə edilə bilmədi", error?.data?.message || error?.error);
+      console.log(error || error?.data?.message || error?.error);
+    }
+  }
   };
 
   const resetAndClose = () => {
@@ -115,41 +148,51 @@ export default function AddDoctorModal({ open, onClose, onSubmit }) {
       <form onSubmit={handleSubmit} className="grid gap-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Input
-            label="Müraciət"
-            value={form.title}
-            onChange={(v) => updateField("title", v)}
-            placeholder="Dr., Prof., etc."
-          />
-          <Input
-            label="İxtisas"
-            value={form.specialty}
-            onChange={(v) => updateField("specialty", v)}
-            placeholder="Kardioloq"
-          />
-          <Input
             label="Ad"
+            required
             value={form.firstName}
             onChange={(v) => updateField("firstName", v)}
             placeholder={"Ad"}
           />
-          <Input
+           <Input
             label="Soyad"
+            required
             value={form.lastName}
             onChange={(v) => updateField("lastName", v)}
             placeholder={"Soyad"}
           />
           <Input
+            label="İxtisas"
+            required
+            value={form.specialty}
+            onChange={(v) => updateField("specialty", v)}
+            placeholder="Kardioloq"
+          />
+          <SlugInput
             label="Slug"
+            required
             value={form.slug}
             onChange={(v) => updateField("slug", v)}
-            placeholder="məs: alimemmedov"
+            text={`${form.firstName} ${form.lastName}`}
+            description="URL üçün qısa ad: yalnız kiçik hərf, rəqəm və tire (-)"
+            placeholder="məs: murad-balayev"
+            onValidChange={setIsSlugValid}
           />
-          <NumberInput
-            label="Sıra nömrəsi"
-            value={form.sortOrder}
-            onChange={(v) => updateField("sortOrder", v)}
+          <div className="md:col-span-2">
+            <ImageUpload
+              label="Şəkil"
+              description="JPEG/PNG/WebP/GIF (max 5MB). Avtomatik sıxılma ≤ 2MB."
+              value={form.photo}
+              onChange={(v) => updateField("photo", v)}
+            />
+          </div>
+          <Input
+            label="Müraciət"
+            value={form.title}
+            onChange={(v) => updateField("title", v)}
+            placeholder="Dr., Prof., etc."
           />
-          <NumberInput
+          {/* <NumberInput
             label="Təcrübə (il)"
             value={form.experienceYears}
             onChange={(v) => updateField("experienceYears", v)}
@@ -158,11 +201,11 @@ export default function AddDoctorModal({ open, onClose, onSubmit }) {
             label="Başlama ili"
             value={form.startedAtYear}
             onChange={(v) => updateField("startedAtYear", v)}
-          />
+          /> */}
         </div>
 
         {/* Aktiv toggle */}
-        <div className="flex items-center justify-between">
+        {/* <div className="flex items-center justify-between">
           <Label title="Aktiv" />
           <button
             type="button"
@@ -178,7 +221,7 @@ export default function AddDoctorModal({ open, onClose, onSubmit }) {
               }`}
             />
           </button>
-        </div>
+        </div> */}
 
         <div className="grid gap-2">
           <Label title="Qısa məlumat" />
@@ -203,7 +246,7 @@ export default function AddDoctorModal({ open, onClose, onSubmit }) {
         </div>
 
         {/* Sub-specialties */}
-        <div className="grid gap-2">
+        {/* <div className="grid gap-2">
           <div className="flex items-center justify-between">
             <Label title="Alt ixtisaslar" />
             <button
@@ -236,50 +279,21 @@ export default function AddDoctorModal({ open, onClose, onSubmit }) {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Education */}
         <ArraySection
           title="Təhsil"
           items={form.education}
-          onAdd={() =>
-            addArrayItem("education", {
-              institution: "",
-              program: "",
-              startYear: 1,
-              endYear: 1,
-            })
-          }
+          onAdd={() => addArrayItem("education", "")}
           onRemove={(i) => removeArrayItem("education", i)}
           renderItem={(item, idx) => (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-2">
               <Input
-                label="Təhsil müəssisəsi"
-                value={item.institution}
-                onChange={(v) =>
-                  updateArrayItem("education", idx, { ...item, institution: v })
-                }
-              />
-              <Input
-                label="Ixtisas"
-                value={item.program}
-                onChange={(v) =>
-                  updateArrayItem("education", idx, { ...item, program: v })
-                }
-              />
-              <NumberInput
-                label="Başlama"
-                value={item.startYear}
-                onChange={(v) =>
-                  updateArrayItem("education", idx, { ...item, startYear: v })
-                }
-              />
-              <NumberInput
-                label="Bitirmə"
-                value={item.endYear}
-                onChange={(v) =>
-                  updateArrayItem("education", idx, { ...item, endYear: v })
-                }
+                label={`Təhsil #${idx + 1}`}
+                value={item}
+                onChange={(v) => updateArrayItem("education", idx, v)}
+                placeholder="Məs: ADA Universiteti - Tibb"
               />
             </div>
           )}
@@ -289,32 +303,15 @@ export default function AddDoctorModal({ open, onClose, onSubmit }) {
         <ArraySection
           title="Sertifikatlar"
           items={form.certificates}
-          onAdd={() =>
-            addArrayItem("certificates", { title: "", issuer: "", year: 1 })
-          }
+          onAdd={() => addArrayItem("certificates", "")}
           onRemove={(i) => removeArrayItem("certificates", i)}
           renderItem={(item, idx) => (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 gap-2">
               <Input
-                label="Başlıq"
-                value={item.title}
-                onChange={(v) =>
-                  updateArrayItem("certificates", idx, { ...item, title: v })
-                }
-              />
-              <Input
-                label="Qurum"
-                value={item.issuer}
-                onChange={(v) =>
-                  updateArrayItem("certificates", idx, { ...item, issuer: v })
-                }
-              />
-              <NumberInput
-                label="İl"
-                value={item.year}
-                onChange={(v) =>
-                  updateArrayItem("certificates", idx, { ...item, year: v })
-                }
+                label={`Sertifikat #${idx + 1}`}
+                value={item}
+                onChange={(v) => updateArrayItem("certificates", idx, v)}
+                placeholder="Məs: ACLS – American Heart Association (2023)"
               />
             </div>
           )}
@@ -330,7 +327,15 @@ export default function AddDoctorModal({ open, onClose, onSubmit }) {
           </button>
           <button
             type="submit"
-            className="rounded-md bg-[#3966b0] px-4 py-2 text-sm text-white hover:opacity-90"
+            className="rounded-md bg-[#3966b0] px-4 py-2 text-sm text-white hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={
+              !isSlugValid ||
+              !String(form.firstName).trim() ||
+              !String(form.lastName).trim() ||
+              !String(form.specialty).trim() ||
+              !String(form.slug).trim()
+            }
+            title={!isSlugValid ? "Slug düzgün formatda deyil" : undefined}
           >
             Əlavə et
           </button>
