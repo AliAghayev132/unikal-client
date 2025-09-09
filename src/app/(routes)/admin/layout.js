@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@/app/(routes)/admin/(components)/Sidebar";
+import AdminLoader from "@/app/(routes)/admin/(components)/AdminLoader";
+import { Toaster } from "react-hot-toast";
 
 export default function AdminLayout({ children }) {
   const router = useRouter();
@@ -39,15 +41,26 @@ export default function AdminLayout({ children }) {
   }, [isInitializing, isLoading, isAuthenticated, router]);
 
   if (isInitializing || isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-gray-600">Yüklənir...</div>
-      </div>
-    );
+    return <AdminLoader />;
   }
 
   return (
     <div className="min-h-screen flex bg-gray-50">
+       <Toaster
+                position="top-center"
+                toastOptions={{
+                    duration: 4000,
+                    style: {
+                        background: '#3966b0',
+                        color: '#fff',
+                        fontWeight: '500',
+                        fontSize: '14px',
+                        padding: '12px 16px',
+                        borderRadius: '8px',
+                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                    },
+                }}
+            />
       <Sidebar />
       <main className="flex-1 p-4 md:p-8">{children}</main>
     </div>

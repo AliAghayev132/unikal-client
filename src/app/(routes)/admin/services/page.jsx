@@ -1,10 +1,10 @@
 import React from 'react'
-import AdminPageTitle from "../(components)/AdminPageTitle";
+import AdminPageHeader from "../(components)/AdminPageHeader";
 
 function AdminServicesPage() {
   return (
-    <div>
-      <AdminPageTitle title="Xidmətlər" />
+    <div className="wrapper">
+      <AdminPageHeader title="Xidmətlər" />
     </div>
 )
 }

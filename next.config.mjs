@@ -1,4 +1,17 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.unikalklinika.az',
+      },
+      {
+        protocol: 'https',
+        hostname: 'unikalklinika.az',
+      },
+    ],
+  },
+};
 
 export default nextConfig;

@@ -16,6 +16,14 @@ export const adminDoctorsApi = createApi({
       },
       providesTags: ["Doctors"],
     }),
+    createDoctor: build.mutation({
+        query: (data) => ({
+          url: `/admin/doctors`,
+          method: "POST",
+          body: data,
+        }),
+        invalidatesTags: (result, error, data) => ["Doctors", { type: "Doctors", slug: data.slug }],
+      }),
     // Update user information
     updateDoctor: build.mutation({
       query: ({ slug, data }) => ({
@@ -23,7 +31,7 @@ export const adminDoctorsApi = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ({ slug }) => ["Doctors", { type: "Doctor", slug }],
+      invalidatesTags: ({ slug }) => ["Doctors", { type: "Doctors", slug }],
     }),
 
     // Soft delete user
@@ -34,7 +42,7 @@ export const adminDoctorsApi = createApi({
       }),
       invalidatesTags: (result, error, { slug }) => [
         "Doctors",
-        { type: "Doctor", slug },
+        { type: "Doctors", slug },
       ],
     }),
 
@@ -44,7 +52,7 @@ export const adminDoctorsApi = createApi({
         url: `/admin/doctors/${slug}/photo`,
         method: "POST",
       }),
-      invalidatesTags: (slug) => ["Doctors", { type: "Doctor", slug }],
+      invalidatesTags: (slug) => ["Doctors", { type: "Doctors", slug }],
     }),
 
     // Permanently delete user
@@ -54,7 +62,7 @@ export const adminDoctorsApi = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: (result, error, id) => ["Doctors", { type: "Doctor", id }],
+      invalidatesTags: (result, error, id) => ["Doctors", { type: "Doctors", id }],
     }),
   }),
 });
@@ -62,6 +70,7 @@ export const adminDoctorsApi = createApi({
 // Export hooks
 export const {
   useGetDoctorsQuery,
+  useCreateDoctorMutation,
   useUpdateDoctorMutation,
   useDeleteDoctorMutation,
   useUploadDoctorPhotoMutation,
