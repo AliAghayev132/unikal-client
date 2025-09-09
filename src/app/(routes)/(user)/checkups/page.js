@@ -6,9 +6,9 @@ import Button from '@/components/ui/Button'
 import FAQ from "../(home)/components/FAQ";
 import { CheckCircle, Stethoscope, HeartPulse, Shield, Clock, FlaskConical, Activity } from 'lucide-react'
 import Processes from './(components)/Processes'
-import ContactNow from '../about/components/ContactNow'
 import ExtraServices from './(components)/ExtraServices'
 import CheckUpPreparation from './(components)/CheckUpPreparation'
+import ContactNow from '../about/components/ContactNow'
 
 const packages = [
   {
