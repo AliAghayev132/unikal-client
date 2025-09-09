@@ -1,15 +1,20 @@
 "use client";
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./slices/authSlice";
 
-export const makeStore = () =>
-  configureStore({
-    reducer: {
-      auth: authReducer,
-    },
-    devTools: process.env.NODE_ENV !== "production",
-  });
+// Apis
+import { adminAuthApi } from "./admin/auth/adminAuthApi";
+// Reducers
+import adminAuthReducer from "./admin/auth/adminAuthSlice";
 
-export const store = makeStore();
+export const store = configureStore({
+  reducer: {
+    adminAuth: adminAuthReducer,
 
-export default store;
+    [adminAuthApi.reducerPath]: adminAuthApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(
+      //! Admin
+      adminAuthApi.middleware
+    ),
+});
