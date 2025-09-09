@@ -42,7 +42,7 @@ const authSlice = createSlice({
       .addMatcher(
         adminAuthApi.endpoints.adminRefreshToken.matchFulfilled,
         (state, { payload }) => {
-          state.accessToken = payload.tokens.accessToken;
+          state.accessToken = payload.token;
           state.isAuthenticated = true;
         }
       );

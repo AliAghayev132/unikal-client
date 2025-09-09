@@ -7,7 +7,7 @@ export const adminAuthApi = createApi({
   reducerPath: "adminAuthApi",
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
-    // credentials: "include",
+    credentials: "include",
   }),
   endpoints: (build) => ({
     adminLogin: build.mutation({
@@ -27,7 +27,6 @@ export const adminAuthApi = createApi({
       query: () => ({
         url: "/admin/auth/refresh",
         method: "POST",
-        credentials: "include",
       }),
     }),
   }),
