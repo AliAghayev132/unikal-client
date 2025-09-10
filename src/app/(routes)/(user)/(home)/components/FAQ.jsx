@@ -33,7 +33,7 @@ const FAQItem = ({ q, a, i }) => {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center gap-3 px-4 py-4 text-left"
+        className="w-full cursor-pointer flex items-center gap-3 px-4 py-4 text-left"
         aria-expanded={open}
       >
         <span
@@ -113,7 +113,7 @@ const FAQ = () => {
               Əgər sualınıza cavab tapa bilməmisinizsə, bizimlə əlaqə saxlayın və ya birbaşa həkim qəbuluna yazılın.
             </p>
             <div className="mt-5 flex justify-center">
-              <Button text="Qəbula Yazılın" variant="default" />
+              <Button text="Qəbula Yazılın" isLink href="/contact" variant="default" />
             </div>
           </div>
         </motion.div>

@@ -17,7 +17,7 @@ function Home() {
 
 
   return (
-    <div className="font-sans w-full flex flex-col items-center overflow-hidden">
+    <div className="w-full flex flex-col items-center overflow-hidden">
      <Header />
      <Services />
      <Partners />
