@@ -160,10 +160,10 @@ export function ImageUpload({
     });
 
   const compressImage = async (file, maxMB) => {
-    // For GIF, skip compression (canvas breaks animation). Only accept if <= maxMB
+    // GIF: animasiya üçün canvas pozulduğundan sıxma etmirik; sadəcə ölçü limitini yoxlayırıq
     if (file.type === "image/gif") {
       if (toMB(file.size) > maxMB) {
-        throw new Error("GIF faylı 2MB-dan böyükdür və sıxıla bilmir");
+        throw new Error(`GIF faylı ${maxMB}MB-dan böyükdür və sıxıla bilmir`);
       }
       const dataUrl = await readFileAsDataURL(file);
       return { dataUrl, mime: file.type, name: file.name, size: file.size };
@@ -174,7 +174,6 @@ export function ImageUpload({
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
 
-    // Start with original dimensions, progressively reduce quality, and if needed, dimensions
     let width = img.width;
     let height = img.height;
     const MIME = file.type === "image/jpg" ? "image/jpeg" : file.type;
@@ -193,30 +192,27 @@ export function ImageUpload({
 
     while (attempt < 10) {
       const url = exportOnce();
-      const sizeBytes = Math.ceil((url.length * 3) / 4); // approximate base64 size
+      const sizeBytes = Math.ceil((url.length * 3) / 4); // base64 ölçüsünün təxmini hesabı
       const sizeMB = toMB(sizeBytes);
       if (sizeMB <= maxMB) {
         out = { dataUrl: url, mime: MIME, name: file.name, size: sizeBytes };
         break;
       }
-      // Reduce quality first
       if (quality > 0.4) {
-        quality -= 0.1;
+        quality -= 0.1; // əvvəl quality azaldırıq
       } else {
-        // Then reduce dimensions by 85%
-        width = Math.floor(width * 0.85);
+        width = Math.floor(width * 0.85); // sonra ölçüləri
         height = Math.floor(height * 0.85);
       }
       attempt++;
     }
 
     if (!out) {
-      // Final export at lowest reasonable settings
       quality = 0.35;
       const url = exportOnce();
       const sizeBytes = Math.ceil((url.length * 3) / 4);
       if (toMB(sizeBytes) > maxMB) {
-        throw new Error("Şəkil 2MB-dan kiçik ölçüyə endirilə bilmədi");
+        throw new Error(`Şəkil ${maxMB}MB-dan kiçik ölçüyə endirilə bilmədi`);
       }
       out = { dataUrl: url, mime: MIME, name: file.name, size: sizeBytes };
     }
@@ -242,7 +238,7 @@ export function ImageUpload({
         name: compressed.name,
         type: compressed.mime,
         size: compressed.size,
-        data: compressed.dataUrl,
+        data: compressed.dataUrl, // parent burada data kimi alır
       });
     } catch (e) {
       console.error(e);
@@ -271,9 +267,7 @@ export function ImageUpload({
         <div className="flex items-center gap-1">
           <Label title={label} /> {required && <span className="text-red-500">*</span>}
         </div>
-        {description ? (
-          <span className="text-xs text-gray-500">{description}</span>
-        ) : null}
+        {description ? <span className="text-xs text-gray-500">{description}</span> : null}
       </div>
 
       <div
@@ -291,7 +285,7 @@ export function ImageUpload({
             <div className="text-sm">
               <p className="font-medium text-gray-800 line-clamp-1">{value.name}</p>
               <p className="text-xs text-gray-500 mt-0.5">
-                {(toMB(value.size)).toFixed(2)} MB · {value.type}
+                {toMB(value.size).toFixed(2)} MB · {value.type}
               </p>
             </div>
             <button
@@ -304,10 +298,10 @@ export function ImageUpload({
           </div>
         ) : (
           <>
-            <p className="text-sm text-gray-700">
-              Şəkli sürükləyib buraxın və ya seçin
+            <p className="text-sm text-gray-700">Şəkli sürükləyib buraxın və ya seçin</p>
+            <p className="text-xs text-gray-500">
+              JPEG, PNG, WebP, GIF · Max {maxSizeMB}MB · Sıxılma: ≤ {targetMaxMB}MB
             </p>
-            <p className="text-xs text-gray-500">JPEG, PNG, WebP, GIF · Max {maxSizeMB}MB · Sıxılma: ≤ {targetMaxMB}MB</p>
             <label className="mt-1 inline-flex cursor-pointer items-center gap-2 rounded-md border border-gray-200 bg-white px-3 py-1.5 text-xs hover:bg-gray-50">
               Şəkil seç
               <input type="file" accept={ACCEPT.join(",")} className="hidden" onChange={onInputChange} />

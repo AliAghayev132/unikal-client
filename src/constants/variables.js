@@ -1,5 +1,5 @@
-export const API_BASE_URL = "https://www.unikalklinika.az";
-export const API_URL = "https://www.unikalklinika.az/api";
+export const API_BASE_URL = "http://localhost:3001";
+export const API_URL = "http://localhost:3001/api";
 
 
 // Images
