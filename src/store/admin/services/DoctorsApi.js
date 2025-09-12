@@ -17,13 +17,13 @@ export const adminDoctorsApi = createApi({
       providesTags: ["Doctors"],
     }),
     createDoctor: build.mutation({
-        query: (data) => ({
-          url: `/admin/doctors`,
-          method: "POST",
-          body: data,
-        }),
-        invalidatesTags: (result, error, data) => ["Doctors", { type: "Doctors", slug: data.slug }],
+      query: (data) => ({
+        url: `/admin/doctors`,
+        method: "POST",
+        body: data,
       }),
+      invalidatesTags: ["Doctors"],
+    }),
     // Update user information
     updateDoctor: build.mutation({
       query: ({ slug, data }) => ({
@@ -31,7 +31,7 @@ export const adminDoctorsApi = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ({ slug }) => ["Doctors", { type: "Doctors", slug }],
+      invalidatesTags: ["Doctors"],
     }),
 
     // Soft delete user
@@ -40,10 +40,7 @@ export const adminDoctorsApi = createApi({
         url: `/admin/doctors/${slug}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, { slug }) => [
-        "Doctors",
-        { type: "Doctors", slug },
-      ],
+      invalidatesTags: ["Doctors"],
     }),
 
     // Restore deleted user
@@ -52,17 +49,17 @@ export const adminDoctorsApi = createApi({
         url: `/admin/doctors/${slug}/photo`,
         method: "POST",
       }),
-      invalidatesTags: (slug) => ["Doctors", { type: "Doctors", slug }],
+      invalidatesTags: ["Doctors"],
     }),
 
     // Permanently delete user
     OrderDoctors: build.mutation({
-      query: ({data}) => ({
+      query: ({ data }) => ({
         url: `/admin/doctors/order`,
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: (result, error, id) => ["Doctors", { type: "Doctors", id }],
+      invalidatesTags: ["Doctors"],
     }),
   }),
 });

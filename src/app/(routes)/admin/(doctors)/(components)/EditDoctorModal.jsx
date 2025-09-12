@@ -3,7 +3,7 @@
 /* =========================
    External libs & hooks
    ========================= */
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 
 /* =========================
@@ -21,7 +21,9 @@ import {
 /* =========================
    Store (RTK Query)
    ========================= */
-import { useCreateDoctorMutation } from "@/store/admin/services/DoctorsApi";
+// Əgər update mutation-ın varsa buradan import et:
+import { useUpdateDoctorMutation } from "@/store/admin/services/DoctorsApi";
+// Yoxdursa, aşağıda fetch fallback nümunə var.
 
 /* =========================
    Utils
@@ -29,26 +31,53 @@ import { useCreateDoctorMutation } from "@/store/admin/services/DoctorsApi";
 import { confirmAction } from "./DoctorUtils";
 
 /* =========================
-   Initial form state
+   Component
    ========================= */
-const initialForm = {
-  title: "",
-  firstName: "",
-  lastName: "",
-  specialty: "",
-  slug: "",
-  photo: "",
-  summary: "",
-  bio: "",
-  education: [],
-  certificates: [],
-};
+export default function EditDoctorModal({ open, onClose, doctor, onUpdated }) {
+  // RTK Query update mutation (əgər mövcuddursa)
+  const [updateDoctor, { isLoading: isUpdating }] =
+    useUpdateDoctorMutation?.() || [null, { isLoading: false }];
 
-export default function AddDoctorModal({ open, onClose }) {
-  const [createDoctor, { isLoading: isCreatingDoctor }] =
-    useCreateDoctorMutation();
+  // Initial form state doctor-dan doldurulur
+  const initialForm = useMemo(
+    () => ({
+      title: doctor?.title || "",
+      firstName: doctor?.firstName || "",
+      lastName: doctor?.lastName || "",
+      specialty: doctor?.specialty || "",
+      slug: doctor?.slug || "",
+      // Foto üçün preview URL və ya boş obyekt. ImageUpload {data,name,type,size} formatı gözləyir.
+      // Mövcud foto göstərmək üçün value kimi {data: url, name: 'current'} verə bilərik.
+      photo: doctor?.photo
+        ? {
+            name: "current",
+            type: "image/*",
+            size: 0,
+            data: `${process.env.NEXT_PUBLIC_API_DOCTORS_URL || ""}/${
+              doctor.photo
+            }`,
+          }
+        : "",
+      summary: doctor?.summary || "",
+      bio: doctor?.bio || "",
+      education: Array.isArray(doctor?.education) ? [...doctor.education] : [],
+      certificates: Array.isArray(doctor?.certificates)
+        ? [...doctor.certificates]
+        : [],
+    }),
+    [doctor]
+  );
+
   const [form, setForm] = useState(initialForm);
-  const [isSlugValid, setIsSlugValid] = useState(false);
+  const [isSlugValid, setIsSlugValid] = useState(true); // editdə slug hazır gəlir
+
+  useEffect(() => {
+    // Modal hər açıldığında doctor dəyişərsə formu yenilə
+    if (open) {
+      setForm(initialForm);
+      setIsSlugValid(Boolean(doctor?.slug));
+    }
+  }, [open, initialForm, doctor?.slug]);
 
   /* =========================
      Helpers: state update
@@ -99,33 +128,40 @@ export default function AddDoctorModal({ open, onClose }) {
 
   /* =========================
      Append photo to FormData
-     - ImageUpload onChange → { name, type, size, data }
-     - data: dataURL (base64)
+     Note:
+     - Mövcud foto preview dəyəri {data: http-url} ola bilər; bu zaman yeni file göndərməyə ehtiyac yoxdur.
+     - Yalnız yeni foto seçilərsə (data: dataURL base64) Blob-a çevirib append edirik.
      ========================= */
   const appendPhotoIfAny = (fd) => {
     const p = form.photo;
     if (!p) return;
 
-    // If File
-    if (typeof File !== "undefined" && p instanceof File) {
-      fd.append("photo", p, p.name || `${form.slug || "photo"}.jpg`);
-      return;
-    }
-    // If Blob
-    if (typeof Blob !== "undefined" && p instanceof Blob) {
-      fd.append("photo", p, `${form.slug || "photo"}.jpg`);
-      return;
-    }
-    // If dataURL object from ImageUpload
-    if (typeof p === "object" && typeof p.data === "string") {
+    // Əgər ImageUpload-dan dataURL gəlirsə (base64) → Blob
+    if (
+      typeof p === "object" &&
+      typeof p.data === "string" &&
+      p.data.startsWith("data:")
+    ) {
       const blob = dataUrlToBlob(p.data);
       fd.append("photo", blob, `${form.slug || "photo"}.jpg`);
       return;
     }
+
+    // Əgər File/Blob gələrsə (əgər komponentin dəyişdiyini fərz etsək)
+    if (typeof File !== "undefined" && p instanceof File) {
+      fd.append("photo", p, p.name || `${form.slug || "photo"}.jpg`);
+      return;
+    }
+    if (typeof Blob !== "undefined" && p instanceof Blob) {
+      fd.append("photo", p, `${form.slug || "photo"}.jpg`);
+      return;
+    }
+
+    // Əgər p.data http-url-dursa, deməli yeni foto seçilməyib; göndərmirik.
   };
 
   /* =========================
-     Submit
+     Submit (Update)
      ========================= */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -142,8 +178,8 @@ export default function AddDoctorModal({ open, onClose }) {
     }
 
     const result = await confirmAction(
-      "Həkim əlavə edilsin?",
-      "Bu həkim əlavə edilsin!"
+      "Dəyişikliklər saxlanılsın?",
+      "Bu həkim məlumatları yenilənsin!"
     );
     if (!result.isConfirmed) return;
 
@@ -163,45 +199,45 @@ export default function AddDoctorModal({ open, onClose }) {
     if (form.certificates.length > 0)
       formData.append("certificates", JSON.stringify(form.certificates));
 
-    // Photo
+    // Photo (yalnız yeni foto seçilərsə)
     appendPhotoIfAny(formData);
 
-    // Debug FormData
-    for (const [key, value] of formData.entries()) {
-      if (value instanceof File) {
-        console.log("FD:", key, {
-          name: value.name,
-          size: value.size,
-          type: value.type,
-        });
-      } else {
-        console.log("FD:", key, value);
-      }
-    }
-
     try {
-      await createDoctor(formData).unwrap();
-      toast.success("Həkim əlavə edildi");
+      if (updateDoctor) {
+        // RTK Query mutation varsa
+        console.log({ doctor });
+
+        await updateDoctor({ slug: doctor.slug, data: formData }).unwrap();
+      } else {
+        // Fallback: fetch PUT
+        const res = await fetch(`/doctors/${doctor.slug}`, {
+          method: "PUT",
+          body: formData,
+        });
+        if (!res.ok) throw new Error("Update failed");
+      }
+
+      toast.success("Məlumatlar yeniləndi");
+      onUpdated?.(); // lazımsa parent refresh etsin
       resetAndClose();
     } catch (error) {
       const msg =
-        (error && (error.data?.message || error.error)) ||
-        "Həkim əlavə edilə bilmədi";
+        (error && (error.data?.message || error.error)) || "Yeniləmə alınmadı";
       toast.error(msg);
-      console.error("Create doctor error:", error);
+      console.error("Update doctor error:", error);
     }
   };
 
   const resetAndClose = () => {
     setForm(initialForm);
-    onClose && onClose();
+    onClose?.();
   };
 
   /* =========================
      Render
      ========================= */
   return (
-    <AdminModal open={open} onClose={resetAndClose} title="Həkim əlavə et">
+    <AdminModal open={open} onClose={resetAndClose} title="Həkimi redaktə et">
       <form onSubmit={handleSubmit} className="grid gap-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Input
@@ -228,10 +264,11 @@ export default function AddDoctorModal({ open, onClose }) {
           <SlugInput
             label="Slug"
             required
+            disabled // slug dəyişməsini istəmirsənsə saxla, backend dəstəkləyirsə qaldıra bilərsən
             value={form.slug}
             onChange={(v) => updateField("slug", v)}
             text={`${form.firstName} ${form.lastName}`}
-            description="URL üçün qısa ad: yalnız kiçik hərf, rəqəm və tire (-)"
+            description="URL qısa ad (slug)"
             placeholder="məs: murad-balayev"
             onValidChange={setIsSlugValid}
           />
@@ -243,6 +280,9 @@ export default function AddDoctorModal({ open, onClose }) {
               value={form.photo}
               onChange={(v) => updateField("photo", v)}
             />
+            <p className="mt-1 text-xs text-gray-500">
+              Mövcud şəkil saxlanacaq. Yeni şəkil seçsən, yenisi yüklənəcək.
+            </p>
           </div>
 
           <Input
@@ -316,7 +356,7 @@ export default function AddDoctorModal({ open, onClose }) {
           <button
             type="submit"
             disabled={
-              isCreatingDoctor ||
+              isUpdating ||
               !isSlugValid ||
               !String(form.firstName).trim() ||
               !String(form.lastName).trim() ||
@@ -326,7 +366,7 @@ export default function AddDoctorModal({ open, onClose }) {
             title={!isSlugValid ? "Slug düzgün formatda deyil" : undefined}
             className="rounded-md bg-[#3966b0] px-4 py-2 text-sm text-white hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Əlavə et
+            Yadda saxla
           </button>
         </div>
       </form>
@@ -335,7 +375,7 @@ export default function AddDoctorModal({ open, onClose }) {
 }
 
 /* =========================
-   ArraySection small component
+   ArraySection
    ========================= */
 function ArraySection({ title, items, onAdd, onRemove, renderItem }) {
   return (
@@ -354,7 +394,7 @@ function ArraySection({ title, items, onAdd, onRemove, renderItem }) {
       <div className="grid gap-3">
         {items.map((_, idx) => (
           <div key={idx} className="rounded-md border border-gray-200 p-3">
-            <div className="flex items-center justify-between mb-2">
+            <div className="mb-2 flex items-center justify-between">
               <span className="text-sm font-medium text-gray-800">
                 #{idx + 1}
               </span>

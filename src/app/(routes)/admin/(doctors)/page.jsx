@@ -1,6 +1,9 @@
 "use client";
 import { useState } from "react";
-import { useDeleteDoctorMutation, useGetDoctorsQuery } from "@/store/admin/services/DoctorsApi";
+import {
+  useDeleteDoctorMutation,
+  useGetDoctorsQuery,
+} from "@/store/admin/services/DoctorsApi";
 import DoctorItemAdmin from "./(components)/DoctorItemAdmin";
 import AdminLoader from "../(components)/AdminLoader";
 import AdminPageHeader from "../(components)/AdminPageHeader";
@@ -9,20 +12,19 @@ import { Plus } from "lucide-react";
 
 export default function AdminDoctorsPage() {
   const { data, isLoading } = useGetDoctorsQuery({});
-  const [deleteDoctor, { isLoading: isDeletingDoctor }] = useDeleteDoctorMutation();
+  const [deleteDoctor, { isLoading: isDeletingDoctor }] =
+    useDeleteDoctorMutation();
   const [openAdd, setOpenAdd] = useState(false);
 
-  
-  if(isLoading || isDeletingDoctor){
-    return <AdminLoader />
+  if (isLoading || isDeletingDoctor) {
+    return <AdminLoader />;
   }
-  
-  console.log(data);
+
   return (
     <div className="admin-wrapper">
       <AdminPageHeader
         title="Həkimlər"
-        action={(
+        action={
           <button
             type="button"
             onClick={() => setOpenAdd(true)}
@@ -30,12 +32,16 @@ export default function AdminDoctorsPage() {
           >
             <Plus size={16} /> Həkim əlavə et
           </button>
-        )}
+        }
       />
       {data?.data?.length > 0 ? (
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {data?.data?.map((doctor) => (
-            <DoctorItemAdmin key={doctor._id} doctor={doctor} deleteDoctor={deleteDoctor} />
+            <DoctorItemAdmin
+              key={doctor._id}
+              doctor={doctor}
+              deleteDoctor={deleteDoctor}
+            />
           ))}
         </div>
       ) : (
@@ -46,10 +52,7 @@ export default function AdminDoctorsPage() {
         </div>
       )}
 
-      <AddDoctorModal
-        open={openAdd}
-        onClose={() => setOpenAdd(false)}
-      />
+      <AddDoctorModal open={openAdd} onClose={() => setOpenAdd(false)} />
     </div>
   );
 }
