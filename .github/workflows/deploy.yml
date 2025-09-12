@@ -1,0 +1,30 @@
+name: Deploy Next.js App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SECRET_KEY }}
+          script: |
+            cd /var/www/unikal/client
+            git pull origin main
+            npm install
+            npm run build
+            # PM2 ile unikalclient adlı Next.js uygulamasını başlat veya restart et
+            pm2 describe unikalclient || pm2 start npm --name "unikalclient" -- run start
+            pm2 restart unikalclient
+            pm2 save
