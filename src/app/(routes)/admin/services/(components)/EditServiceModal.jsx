@@ -143,18 +143,7 @@ export default function EditServiceModal({ open, onClose, service, onUpdated }) 
           />
         </div>
 
-        <div className="md:col-span-2">
-          <ImageUpload
-            label="Şəkil"
-            description="JPEG/PNG/WebP/GIF (max 5MB). Avtomatik sıxılma ≤ 2MB."
-            value={form.photo}
-            onChange={(v) => updateField("photo", v)}
-          />
-          <p className="mt-1 text-xs text-gray-500">
-            Mövcud şəkil saxlanacaq. Yeni şəkil seçsən, yenisi yüklənəcək.
-          </p>
-        </div>
-
+   
         <div className="grid gap-2">
           <Label title="Qısa məlumat" />
           <textarea
@@ -175,6 +164,17 @@ export default function EditServiceModal({ open, onClose, service, onUpdated }) 
             rows={4}
             placeholder="Detallı təsvir"
           />
+        </div>
+        <div >
+          <ImageUpload
+            label="Şəkil"
+            description="JPEG/PNG/WebP/GIF (max 5MB). Avtomatik sıxılma ≤ 2MB."
+            value={form.photo}
+            onChange={(v) => updateField("photo", v)}
+          />
+          <p className="mt-1 text-xs text-gray-500">
+            Mövcud şəkil saxlanacaq. Yeni şəkil seçsən, yenisi yüklənəcək.
+          </p>
         </div>
 
         <div className="flex items-center justify-end gap-2">
