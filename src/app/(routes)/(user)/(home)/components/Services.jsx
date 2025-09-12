@@ -27,7 +27,7 @@ const Services = () => {
         viewport={{ once: true }}
       >
         <h2 className="text-3xl md:text-4xl font-semibold leading-tight text-slate-900">
-          Ailənizin Sağlamlığı Üçün tam
+          Ailənizin Sağlamlığı Üçün Tam
           <br className="hidden md:block" /> Tibbi Xidmətlər
         </h2>
         <div className="hidden sm:block">
