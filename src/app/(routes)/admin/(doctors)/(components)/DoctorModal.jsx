@@ -11,7 +11,6 @@ import {
   Award,
   BadgeInfo,
   User2,
-  Hash,
   CheckCircle2,
 } from "lucide-react";
 

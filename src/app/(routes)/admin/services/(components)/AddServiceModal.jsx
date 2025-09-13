@@ -15,7 +15,7 @@ const initialForm = {
   slug: "",
   summary: "",
   description: "",
-  photo: ""
+  image: ""
 };
 
 export default function AddServiceModal({ open, onClose }) {
@@ -75,23 +75,23 @@ export default function AddServiceModal({ open, onClose }) {
   };
 
   const appendPhotoIfAny = (fd) => {
-    const p = form.photo;
+    const p = form.image;
     if (!p) return;
 
     // If File
     if (typeof File !== "undefined" && p instanceof File) {
-      fd.append("photo", p, p.name || `${form.slug || "photo"}.jpg`);
+      fd.append("image", p, p.name || `${form.slug || "photo"}.jpg`);
       return;
     }
     // If Blob
     if (typeof Blob !== "undefined" && p instanceof Blob) {
-      fd.append("photo", p, `${form.slug || "photo"}.jpg`);
+      fd.append("image", p, `${form.slug || "photo"}.jpg`);
       return;
     }
     // If dataURL object from ImageUpload
     if (typeof p === "object" && typeof p.data === "string") {
       const blob = dataUrlToBlob(p.data);
-      fd.append("photo", blob, `${form.slug || "photo"}.jpg`);
+      fd.append("image", blob, `${form.slug || "photo"}.jpg`);
       return;
     }
   };
@@ -149,8 +149,8 @@ export default function AddServiceModal({ open, onClose }) {
                     <ImageUpload
                       label="Şəkil"
                       description="JPEG/PNG/WebP/GIF (max 5MB). Avtomatik sıxılma ≤ 2MB."
-                      value={form.photo}
-                      onChange={(v) => updateField("photo", v)}
+                      value={form.image}
+                      onChange={(v) => updateField("image", v)}
                     />
                   </div>
         

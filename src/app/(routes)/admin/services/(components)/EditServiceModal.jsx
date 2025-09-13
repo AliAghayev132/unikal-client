@@ -19,12 +19,12 @@ export default function EditServiceModal({ open, onClose, service, onUpdated }) 
       slug: service?.slug || "",
       summary: service?.summary || "",
       description: service?.description || "",
-      photo: service?.photo
+      image: service?.image
         ? {
             name: "current",
             type: "image/*",
             size: 0,
-            data: `${API_SERVICES_URL}/${service.photo}`,
+            data: `${API_SERVICES_URL}/${service.image}`,
           }
         : "",
     }),
@@ -91,25 +91,25 @@ export default function EditServiceModal({ open, onClose, service, onUpdated }) 
 
   // Append photo only if a new one is selected (dataURL/File/Blob). If it's an http preview, skip.
   const appendPhotoIfAny = (fd) => {
-    const p = form.photo;
+    const p = form.image;
     if (!p) return;
 
     if (typeof p === "object" && typeof p.data === "string") {
       // If it's a dataURL (newly selected), convert to blob
       if (p.data.startsWith("data:")) {
         const blob = dataUrlToBlob(p.data);
-        fd.append("photo", blob, `${form.slug || "photo"}.jpg`);
+        fd.append("image", blob, `${form.slug || "photo"}.jpg`);
         return;
       }
       // If it's an http url (preview of current image), do not send
       return;
     }
     if (typeof File !== "undefined" && p instanceof File) {
-      fd.append("photo", p, p.name || `${form.slug || "photo"}.jpg`);
+      fd.append("image", p, p.name || `${form.slug || "photo"}.jpg`);
       return;
     }
     if (typeof Blob !== "undefined" && p instanceof Blob) {
-      fd.append("photo", p, `${form.slug || "photo"}.jpg`);
+      fd.append("image", p, `${form.slug || "photo"}.jpg`);
       return;
     }
   };
@@ -169,8 +169,8 @@ export default function EditServiceModal({ open, onClose, service, onUpdated }) 
           <ImageUpload
             label="Şəkil"
             description="JPEG/PNG/WebP/GIF (max 5MB). Avtomatik sıxılma ≤ 2MB."
-            value={form.photo}
-            onChange={(v) => updateField("photo", v)}
+            value={form.image}
+            onChange={(v) => updateField("image", v)}
           />
           <p className="mt-1 text-xs text-gray-500">
             Mövcud şəkil saxlanacaq. Yeni şəkil seçsən, yenisi yüklənəcək.
